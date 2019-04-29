@@ -11,7 +11,7 @@ export class Terminal {
       if (command == null) {
         throw new Error('Unknown command ' + value);
       }
-      this.add(command);
+      this.push(command);
     }
   }
 
@@ -27,8 +27,20 @@ export class Terminal {
     return commands;
   }
 
-  private add(command: Command) {
+  public push(command: Command) {
     this.buffer.push(command);
+  }
+
+  public pop() {
+    return this.buffer.pop();
+  }
+
+  public get(index: number) {
+    return this.buffer[index];
+  }
+
+  public size() {
+    return this.buffer.length;
   }
 
   public clear() {

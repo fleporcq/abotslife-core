@@ -1,4 +1,4 @@
-import { Bot } from './bots/bot';
+import { BasicBot } from './bots/basic-bot';
 import { Position } from './position';
 import { Orientation } from './orientation';
 
@@ -8,7 +8,7 @@ export class Grid {
 
   private height: number;
 
-  private bots: Map<string, Bot> = new Map<string, Bot>();
+  private bots: Map<string, BasicBot> = new Map<string, BasicBot>();
 
   constructor(width: number, height: number) {
     if (!Number.isInteger(width) || width < 1 || !Number.isInteger(height) || height < 1) {
@@ -26,13 +26,21 @@ export class Grid {
     return this.height;
   }
 
-  public addBot(bot: Bot, position?: Position, orientation?: Orientation) {
+  public addBot(bot: BasicBot, position?: Position, orientation?: Orientation) {
     bot._putOnGrid(this, position, orientation);
     this.bots.set(bot.getName(), bot);
   }
 
   public getBot(name: string) {
     this.bots.get(name);
+  }
+
+  public next() {
+    for (const name in this.bots) {
+      if (this.bots.has(name)) {
+        this.bots.get(name).next();
+      }
+    }
   }
 
 }

@@ -1,6 +1,6 @@
 export enum Command {
-  FORWARD = 'FORWARD',
-  BACKWARD = 'BACKWARD',
-  LEFT = 'LEFT',
-  RIGHT = 'RIGHT'
+  FORWARD = 'forward',
+  BACKWARD = 'backward',
+  LEFT = 'left',
+  RIGHT = 'right'
 }

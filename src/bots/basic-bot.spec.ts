@@ -11,7 +11,7 @@ describe('Basic bot', () => {
     grid = new Grid(10, 10);
   });
 
-  it('should throw errors cause the bot is not on a grid', () => {
+  it('should throw errors because the bot is not on a grid', () => {
     const bot = new BasicBot('Wall-e');
     const forward = () => {
       bot.forward();
@@ -39,15 +39,6 @@ describe('Basic bot', () => {
     expect(bot._position().y).toBe(0);
   });
 
-
-  it('{0,0:E} → → ↷ →', () => {
-    const bot = new BasicBot('Wall-e');
-    grid.addBot(bot);
-    bot.forward().forward().right().forward();
-    expect(bot._position().x).toBe(2);
-    expect(bot._position().y).toBe(1);
-    expect(bot._orientation()).toBe(Orientation.SOUTH);
-  });
 
   it('{0,0:E} → → ↷ →', () => {
     const bot = new BasicBot('Wall-e');
