@@ -1,28 +1,79 @@
 import { BasicBot } from './basic-bot';
-import { Map } from '../map';
+import { Grid } from '../grid';
+import { Orientation } from '../orientation';
+import { Position } from '../position';
 
-describe('move a basic bot', () => {
+describe('Basic bot', () => {
+
+  let grid;
 
   beforeEach(() => {
+    grid = new Grid(10, 10);
   });
 
-  it('should throw errors cause the bot is not on a map', () => {
-    const bot = new BasicBot();
+  it('should throw errors cause the bot is not on a grid', () => {
+    const bot = new BasicBot('Wall-e');
     const forward = () => {
       bot.forward();
     };
-    expect(forward).toThrow('The bot can\'t move until it has been put on a map.');
+    expect(forward).toThrow('The bot can\'t move until it has been put on a grid.');
     const right = () => {
       bot.right();
     };
-    expect(right).toThrow('The bot can\'t turn until it has been put on a map.');
+    expect(right).toThrow('The bot can\'t turn until it has been put on a grid.');
   });
 
-  it('should forward 2 times', () => {
-    const map = new Map(10, 10);
-    const bot = new BasicBot();
-    bot.putOnMap(map);
+  it('{0,0:E} → →', () => {
+    const bot = new BasicBot('Wall-e');
+    grid.addBot(bot);
     bot.forward().forward();
+    expect(bot._position().x).toBe(2);
+    expect(bot._position().y).toBe(0);
+  });
+
+  it('{0,0:E} → → ←', () => {
+    const bot = new BasicBot('Wall-e');
+    grid.addBot(bot);
+    bot.forward().forward().backward();
+    expect(bot._position().x).toBe(1);
+    expect(bot._position().y).toBe(0);
+  });
+
+
+  it('{0,0:E} → → ↷ →', () => {
+    const bot = new BasicBot('Wall-e');
+    grid.addBot(bot);
+    bot.forward().forward().right().forward();
+    expect(bot._position().x).toBe(2);
+    expect(bot._position().y).toBe(1);
+    expect(bot._orientation()).toBe(Orientation.SOUTH);
+  });
+
+  it('{0,0:E} → → ↷ →', () => {
+    const bot = new BasicBot('Wall-e');
+    grid.addBot(bot);
+    bot.forward().forward().right().forward();
+    expect(bot._position().x).toBe(2);
+    expect(bot._position().y).toBe(1);
+    expect(bot._orientation()).toBe(Orientation.SOUTH);
+  });
+
+  it('{0,0:E} → ↷ → → ↶ → →', () => {
+    const bot = new BasicBot('Wall-e');
+    grid.addBot(bot);
+    bot.forward().right().forward().forward().left().forward().forward();
+    expect(bot._position().x).toBe(3);
+    expect(bot._position().y).toBe(2);
+    expect(bot._orientation()).toBe(Orientation.EAST);
+  });
+
+  it('{3,3:S} ↷ ↷', () => {
+    const bot = new BasicBot('Wall-e');
+    grid.addBot(bot, new Position(3, 3), Orientation.SOUTH);
+    bot.right().right();
+    expect(bot._position().x).toBe(3);
+    expect(bot._position().y).toBe(3);
+    expect(bot._orientation()).toBe(Orientation.NORTH);
   });
 
 });

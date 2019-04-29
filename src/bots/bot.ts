@@ -1,19 +1,23 @@
-import { Map } from '../map';
+import { Grid } from '../grid';
 import { Position } from '../position';
 import { Orientation } from '../orientation';
 
 export abstract class Bot {
 
-  private map: Map = null;
+  private name: string;
+
+  private grid: Grid = null;
 
   private position: Position = null;
 
   private orientation: Orientation = null;
 
-  public putOnMap(map: Map, position: Position = new Position(), orientation: Orientation = Orientation.EAST) {
-    this.map = map;
-    this.position = position;
-    this.orientation = orientation;
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  public getName(): string {
+    return this.name;
   }
 
   public forward(): this {
@@ -38,7 +42,7 @@ export abstract class Bot {
 
   private move(forward: boolean) {
     if (this.orientation == null) {
-      throw new Error('The bot can\'t move until it has been put on a map.');
+      throw new Error('The bot can\'t move until it has been put on a grid.');
     }
     switch (this.orientation) {
       case Orientation.NORTH:
@@ -58,7 +62,7 @@ export abstract class Bot {
 
   private rotate90(clockwise: boolean) {
     if (this.orientation == null) {
-      throw new Error('The bot can\'t turn until it has been put on a map.');
+      throw new Error('The bot can\'t turn until it has been put on a grid.');
     }
     switch (this.orientation) {
       case Orientation.NORTH:
@@ -74,6 +78,20 @@ export abstract class Bot {
         this.orientation = clockwise ? Orientation.NORTH : Orientation.SOUTH;
         break;
     }
+  }
+
+  public _putOnGrid(grid: Grid, position: Position = new Position(), orientation: Orientation = Orientation.EAST) {
+    this.grid = grid;
+    this.position = position;
+    this.orientation = orientation;
+  }
+
+  public _position(): Position {
+    return this.position;
+  }
+
+  public _orientation(): Orientation {
+    return this.orientation;
   }
 
 }
