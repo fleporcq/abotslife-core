@@ -1,26 +1,16 @@
-import { Orientation } from '../../orientation';
-import { Position } from '../../position';
+import { Orientation } from '../../pose/orientation';
+import { Pose } from '../../pose/pose';
 
 export class DeplacementSystem {
 
-  private position: Position = null;
+  private pose: Pose = null;
 
-  private orientation: Orientation = null;
-
-  public setPosition(position: Position) {
-    this.position = position;
+  public setPose(pose: Pose) {
+    this.pose = pose;
   }
 
-  public setOrientation(orientation: Orientation) {
-    this.orientation = orientation;
-  }
-
-  public getPosition(): Position {
-    return this.position;
-  }
-
-  public getOrientation(): Orientation {
-    return this.orientation;
+  public getPose(): Pose {
+    return this.pose;
   }
 
   public forward() {
@@ -40,41 +30,41 @@ export class DeplacementSystem {
   }
 
   private move(forward: boolean) {
-    if (this.orientation == null) {
+    if (this.pose == null) {
       throw new Error('The bot can\'t move until it has been put on a grid.');
     }
-    switch (this.orientation) {
+    switch (this.pose.orientation) {
       case Orientation.NORTH:
-        this.position.y += forward ? -1 : +1;
+        this.pose.position.y += forward ? -1 : +1;
         break;
       case Orientation.EAST:
-        this.position.x += forward ? +1 : -1;
+        this.pose.position.x += forward ? +1 : -1;
         break;
       case Orientation.SOUTH:
-        this.position.y += forward ? +1 : -1;
+        this.pose.position.y += forward ? +1 : -1;
         break;
       case Orientation.WEST:
-        this.position.x += forward ? -1 : +1;
+        this.pose.position.x += forward ? -1 : +1;
         break;
     }
   }
 
   private rotate90(clockwise: boolean) {
-    if (this.orientation == null) {
+    if (this.pose == null) {
       throw new Error('The bot can\'t turn until it has been put on a grid.');
     }
-    switch (this.orientation) {
+    switch (this.pose.orientation) {
       case Orientation.NORTH:
-        this.orientation = clockwise ? Orientation.EAST : Orientation.WEST;
+        this.pose.orientation = clockwise ? Orientation.EAST : Orientation.WEST;
         break;
       case Orientation.EAST:
-        this.orientation = clockwise ? Orientation.SOUTH : Orientation.NORTH;
+        this.pose.orientation = clockwise ? Orientation.SOUTH : Orientation.NORTH;
         break;
       case Orientation.SOUTH:
-        this.orientation = clockwise ? Orientation.WEST : Orientation.EAST;
+        this.pose.orientation = clockwise ? Orientation.WEST : Orientation.EAST;
         break;
       case Orientation.WEST:
-        this.orientation = clockwise ? Orientation.NORTH : Orientation.SOUTH;
+        this.pose.orientation = clockwise ? Orientation.NORTH : Orientation.SOUTH;
         break;
     }
   }

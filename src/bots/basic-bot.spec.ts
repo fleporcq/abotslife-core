@@ -1,7 +1,7 @@
 import { BasicBot } from './basic-bot';
 import { Grid } from '../grid';
-import { Orientation } from '../orientation';
-import { Position } from '../position';
+import { Orientation } from '../pose/orientation';
+import { Pose } from '../pose/pose';
 
 describe('Basic bot', () => {
 
@@ -60,7 +60,7 @@ describe('Basic bot', () => {
 
   it('{3,3:S} ↷ ↷', () => {
     const bot = new BasicBot('Wall-e');
-    grid.addBot(bot, new Position(3, 3), Orientation.SOUTH);
+    grid.addBot(bot, new Pose(3, 3, Orientation.SOUTH));
     bot.right().right();
     expect(bot._position().x).toBe(3);
     expect(bot._position().y).toBe(3);

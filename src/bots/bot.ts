@@ -1,6 +1,5 @@
 import { Grid } from '../grid';
-import { Position } from '../position';
-import { Orientation } from '../orientation';
+import { Pose } from '../pose/pose';
 
 export interface Bot {
   getName(): string;
@@ -19,7 +18,7 @@ export interface Bot {
 
   _orientation();
 
-  _putOnGrid(grid: Grid, position: Position, orientation: Orientation);
+  _putOnGrid(grid: Grid, pose: Pose);
 
   hasNext(): boolean;
 

@@ -1,6 +1,6 @@
 import { Grid } from '../grid';
-import { Orientation } from '../orientation';
-import { Position } from '../position';
+import { Orientation } from '../pose/orientation';
+import { Pose } from '../pose/pose';
 import { SequentialBot } from './sequential-bot';
 
 describe('Sequential bot', () => {
@@ -59,7 +59,7 @@ describe('Sequential bot', () => {
 
   it('{3,3:S} ↷ ↷', () => {
     const bot = new SequentialBot('Wall-e');
-    grid.addBot(bot, new Position(3, 3), Orientation.SOUTH);
+    grid.addBot(bot, new Pose(3, 3, Orientation.SOUTH));
     bot.writeToMemory('RIGHT RIGHT');
     while (bot.hasNext()) {
       bot.next();

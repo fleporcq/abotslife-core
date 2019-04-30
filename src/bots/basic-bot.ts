@@ -1,8 +1,9 @@
 import { Grid } from '../grid';
-import { Position } from '../position';
-import { Orientation } from '../orientation';
+import { Position } from '../pose/position';
+import { Orientation } from '../pose/orientation';
 import { Bot } from './bot';
 import { DeplacementSystem } from '../systems/deplacement/deplacement-system';
+import { Pose } from '../pose/pose';
 
 export class BasicBot implements Bot {
 
@@ -45,18 +46,17 @@ export class BasicBot implements Bot {
     return this;
   }
 
-  public _putOnGrid(grid: Grid, position: Position = new Position(), orientation: Orientation = Orientation.EAST) {
+  public _putOnGrid(grid: Grid, pose: Pose) {
     this.grid = grid;
-    this.deplacementSytem.setPosition(position);
-    this.deplacementSytem.setOrientation(orientation);
+    this.deplacementSytem.setPose(pose);
   }
 
   public _position(): Position {
-    return this.deplacementSytem.getPosition();
+    return this.deplacementSytem.getPose().position;
   }
 
   public _orientation(): Orientation {
-    return this.deplacementSytem.getOrientation();
+    return this.deplacementSytem.getPose().orientation;
   }
 
   public hasNext(): boolean {

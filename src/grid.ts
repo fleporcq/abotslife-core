@@ -1,6 +1,6 @@
 import { BasicBot } from './bots/basic-bot';
-import { Position } from './position';
-import { Orientation } from './orientation';
+import { Pose } from './pose/pose';
+import { Orientation } from './pose/orientation';
 
 export class Grid {
 
@@ -26,8 +26,8 @@ export class Grid {
     return this.height;
   }
 
-  public addBot(bot: BasicBot, position?: Position, orientation?: Orientation) {
-    bot._putOnGrid(this, position, orientation);
+  public addBot(bot: BasicBot, pose: Pose = new Pose(0, 0, Orientation.EAST)) {
+    bot._putOnGrid(this, pose);
     this.bots.set(bot.getName(), bot);
   }
 
