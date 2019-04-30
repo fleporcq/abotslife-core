@@ -27,16 +27,16 @@ describe('Basic bot', () => {
     const bot = new BasicBot('Wall-e');
     grid.addBot(bot);
     bot.forward().forward();
-    expect(bot._position().x).toBe(2);
-    expect(bot._position().y).toBe(0);
+    expect(bot._pose().position.x).toBe(2);
+    expect(bot._pose().position.y).toBe(0);
   });
 
   it('{0,0:E} → → ←', () => {
     const bot = new BasicBot('Wall-e');
     grid.addBot(bot);
     bot.forward().forward().backward();
-    expect(bot._position().x).toBe(1);
-    expect(bot._position().y).toBe(0);
+    expect(bot._pose().position.x).toBe(1);
+    expect(bot._pose().position.y).toBe(0);
   });
 
 
@@ -44,27 +44,27 @@ describe('Basic bot', () => {
     const bot = new BasicBot('Wall-e');
     grid.addBot(bot);
     bot.forward().forward().right().forward();
-    expect(bot._position().x).toBe(2);
-    expect(bot._position().y).toBe(1);
-    expect(bot._orientation()).toBe(Orientation.SOUTH);
+    expect(bot._pose().position.x).toBe(2);
+    expect(bot._pose().position.y).toBe(1);
+    expect(bot._pose().orientation).toBe(Orientation.SOUTH);
   });
 
   it('{0,0:E} → ↷ → → ↶ → →', () => {
     const bot = new BasicBot('Wall-e');
     grid.addBot(bot);
     bot.forward().right().forward().forward().left().forward().forward();
-    expect(bot._position().x).toBe(3);
-    expect(bot._position().y).toBe(2);
-    expect(bot._orientation()).toBe(Orientation.EAST);
+    expect(bot._pose().position.x).toBe(3);
+    expect(bot._pose().position.y).toBe(2);
+    expect(bot._pose().orientation).toBe(Orientation.EAST);
   });
 
   it('{3,3:S} ↷ ↷', () => {
     const bot = new BasicBot('Wall-e');
     grid.addBot(bot, new Pose(3, 3, Orientation.SOUTH));
     bot.right().right();
-    expect(bot._position().x).toBe(3);
-    expect(bot._position().y).toBe(3);
-    expect(bot._orientation()).toBe(Orientation.NORTH);
+    expect(bot._pose().position.x).toBe(3);
+    expect(bot._pose().position.y).toBe(3);
+    expect(bot._pose().orientation).toBe(Orientation.NORTH);
   });
 
 });

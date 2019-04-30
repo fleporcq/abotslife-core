@@ -14,9 +14,7 @@ export interface Bot {
 
   wait(): this;
 
-  _position();
-
-  _orientation();
+  _pose();
 
   _putOnGrid(grid: Grid, pose: Pose);
 

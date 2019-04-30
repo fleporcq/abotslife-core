@@ -18,8 +18,8 @@ describe('Sequential bot', () => {
     while (bot.hasNext()) {
       bot.next();
     }
-    expect(bot._position().x).toBe(2);
-    expect(bot._position().y).toBe(0);
+    expect(bot._pose().position.x).toBe(2);
+    expect(bot._pose().position.y).toBe(0);
   });
 
   it('{0,0:E} → → ←', () => {
@@ -29,8 +29,8 @@ describe('Sequential bot', () => {
     while (bot.hasNext()) {
       bot.next();
     }
-    expect(bot._position().x).toBe(1);
-    expect(bot._position().y).toBe(0);
+    expect(bot._pose().position.x).toBe(1);
+    expect(bot._pose().position.y).toBe(0);
   });
 
   it('{0,0:E} → → ↷ →', () => {
@@ -40,9 +40,9 @@ describe('Sequential bot', () => {
     while (bot.hasNext()) {
       bot.next();
     }
-    expect(bot._position().x).toBe(2);
-    expect(bot._position().y).toBe(1);
-    expect(bot._orientation()).toBe(Orientation.SOUTH);
+    expect(bot._pose().position.x).toBe(2);
+    expect(bot._pose().position.y).toBe(1);
+    expect(bot._pose().orientation).toBe(Orientation.SOUTH);
   });
 
   it('{0,0:E} → ↷ → → ↶ → →', () => {
@@ -52,9 +52,9 @@ describe('Sequential bot', () => {
     while (bot.hasNext()) {
       bot.next();
     }
-    expect(bot._position().x).toBe(3);
-    expect(bot._position().y).toBe(2);
-    expect(bot._orientation()).toBe(Orientation.EAST);
+    expect(bot._pose().position.x).toBe(3);
+    expect(bot._pose().position.y).toBe(2);
+    expect(bot._pose().orientation).toBe(Orientation.EAST);
   });
 
   it('{3,3:S} ↷ ↷', () => {
@@ -64,9 +64,9 @@ describe('Sequential bot', () => {
     while (bot.hasNext()) {
       bot.next();
     }
-    expect(bot._position().x).toBe(3);
-    expect(bot._position().y).toBe(3);
-    expect(bot._orientation()).toBe(Orientation.NORTH);
+    expect(bot._pose().position.x).toBe(3);
+    expect(bot._pose().position.y).toBe(3);
+    expect(bot._pose().orientation).toBe(Orientation.NORTH);
   });
 
   it('{0,0:E} loop → ↷ → ↶', () => {
@@ -80,8 +80,8 @@ describe('Sequential bot', () => {
         break;
       }
     }
-    expect(bot._position().x).toBe(3);
-    expect(bot._position().y).toBe(3);
+    expect(bot._pose().position.x).toBe(3);
+    expect(bot._pose().position.y).toBe(3);
   });
 
   it('{0,0:E} loop 4 times → ↷ → ↶', () => {
@@ -92,8 +92,8 @@ describe('Sequential bot', () => {
     while (bot.hasNext()) {
       bot.next();
     }
-    expect(bot._position().x).toBe(4);
-    expect(bot._position().y).toBe(4);
+    expect(bot._pose().position.x).toBe(4);
+    expect(bot._pose().position.y).toBe(4);
   });
 
   it('{0,0:E} → ⭙ →', () => {
@@ -103,8 +103,8 @@ describe('Sequential bot', () => {
     while (bot.hasNext()) {
       bot.next();
     }
-    expect(bot._position().x).toBe(2);
-    expect(bot._position().y).toBe(0);
+    expect(bot._pose().position.x).toBe(2);
+    expect(bot._pose().position.y).toBe(0);
   });
 
   it('clear memory', () => {
@@ -115,8 +115,8 @@ describe('Sequential bot', () => {
     while (bot.hasNext()) {
       bot.next();
     }
-    expect(bot._position().x).toBe(0);
-    expect(bot._position().y).toBe(0);
+    expect(bot._pose().position.x).toBe(0);
+    expect(bot._pose().position.y).toBe(0);
   });
 
 });
