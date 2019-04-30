@@ -1,10 +1,10 @@
 import { BasicBot } from './basic-bot';
-import { Terminal } from '../terminal';
+import { QueuedMemory } from '../memories/queued-memory';
 import { Command } from '../command';
 
 export class SequentialBot extends BasicBot {
 
-  private terminal: Terminal;
+  private memory: QueuedMemory;
 
   private nextStep = 0;
 
@@ -14,11 +14,11 @@ export class SequentialBot extends BasicBot {
 
   constructor(name: string) {
     super(name);
-    this.terminal = new Terminal();
+    this.memory = new QueuedMemory();
   }
 
-  public write(buffer: string) {
-    this.terminal.write(buffer);
+  public writeToMemory(buffer: string) {
+    this.memory.write(buffer);
     return this;
   }
 
@@ -27,8 +27,8 @@ export class SequentialBot extends BasicBot {
     return this;
   }
 
-  public clear() {
-    this.terminal.clear();
+  public clearMemory() {
+    this.memory.clear();
     return this;
   }
 
@@ -38,7 +38,7 @@ export class SequentialBot extends BasicBot {
 
   public next(): this {
     if (this.hasNext()) {
-      this.execute(this.terminal.get(this.nextStep));
+      this.execute(this.memory.get(this.nextStep));
       this.nextStep = this.prepareNextStep();
     }
     return this;
@@ -49,7 +49,7 @@ export class SequentialBot extends BasicBot {
   }
 
   private prepareNextStep() {
-    if (this.nextStep + 1 === this.terminal.size()) {
+    if (this.nextStep + 1 === this.memory.size()) {
       this.loopCount++;
       if (this.loopCount < this.looped) {
         return 0;

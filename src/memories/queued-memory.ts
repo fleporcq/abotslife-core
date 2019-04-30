@@ -1,11 +1,12 @@
-import { Command } from './command';
+import { Command } from '../command';
+import { Memory } from './memory';
 
-export class Terminal {
+export class QueuedMemory implements Memory {
 
-  private buffer: Command[] = [];
+  private queue: Command[] = [];
 
-  public write(entry: string) {
-    const commandValues = this.split(entry);
+  public write(program: string) {
+    const commandValues = this.split(program);
     for (const value of commandValues) {
       const command = Command[value.toUpperCase()];
       if (command == null) {
@@ -28,26 +29,26 @@ export class Terminal {
   }
 
   public push(command: Command) {
-    this.buffer.push(command);
+    this.queue.push(command);
   }
 
   public pop() {
-    return this.buffer.pop();
+    return this.queue.pop();
   }
 
   public get(index: number) {
-    return this.buffer[index];
+    return this.queue[index];
   }
 
   public size() {
-    return this.buffer.length;
+    return this.queue.length;
   }
 
   public clear() {
-    this.buffer = [];
+    this.queue = [];
   }
 
   public _buffer() {
-    return this.buffer;
+    return this.queue;
   }
 }
