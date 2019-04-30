@@ -5,6 +5,10 @@ export class DeplacementSystem {
 
   private pose: Pose = null;
 
+  constructor(pose?: Pose) {
+    this.pose = pose;
+  }
+
   public setPose(pose: Pose) {
     this.pose = pose;
   }
