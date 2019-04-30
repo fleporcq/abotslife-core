@@ -33,7 +33,7 @@ export class SequentialBot extends BasicBot {
   }
 
   public hasNext(): boolean {
-    return this.nextStep != null;
+    return this.nextStep != null && this.nextStep < this.memory.size();
   }
 
   public next(): this {

@@ -107,4 +107,16 @@ describe('Sequential bot', () => {
     expect(bot._position().y).toBe(0);
   });
 
+  it('clear memory', () => {
+    const bot = new SequentialBot('Wall-e');
+    grid.addBot(bot);
+    bot.writeToMemory('FORWARD');
+    bot.clearMemory();
+    while (bot.hasNext()) {
+      bot.next();
+    }
+    expect(bot._position().x).toBe(0);
+    expect(bot._position().y).toBe(0);
+  });
+
 });

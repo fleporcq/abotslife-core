@@ -5,6 +5,10 @@ export class QueuedMemory implements Memory {
 
   private queue: Command[] = [];
 
+  public getQueue() {
+    return this.queue;
+  }
+
   public write(program: string) {
     const commandValues = this.split(program);
     for (const value of commandValues) {
@@ -12,7 +16,7 @@ export class QueuedMemory implements Memory {
       if (command == null) {
         throw new Error('Unknown command ' + value);
       }
-      this.push(command);
+      this.queue.push(command);
     }
   }
 
@@ -28,14 +32,6 @@ export class QueuedMemory implements Memory {
     return commands;
   }
 
-  public push(command: Command) {
-    this.queue.push(command);
-  }
-
-  public pop() {
-    return this.queue.pop();
-  }
-
   public get(index: number) {
     return this.queue[index];
   }
@@ -46,9 +42,5 @@ export class QueuedMemory implements Memory {
 
   public clear() {
     this.queue = [];
-  }
-
-  public _buffer() {
-    return this.queue;
   }
 }
