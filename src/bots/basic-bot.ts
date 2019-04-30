@@ -1,13 +1,13 @@
-import { Grid } from '../grid';
 import { Bot } from './bot';
 import { DeplacementSystem } from '../systems/deplacement-system';
 import { Pose } from '../pose/pose';
+import { World } from '../world';
 
 export class BasicBot implements Bot {
 
   private name: string;
 
-  private grid: Grid = null;
+  private world: World = null;
 
   private deplacementSytem: DeplacementSystem = null;
 
@@ -44,8 +44,8 @@ export class BasicBot implements Bot {
     return this;
   }
 
-  public _putOnGrid(grid: Grid, pose: Pose) {
-    this.grid = grid;
+  public _putOnWorld(world: World, pose: Pose) {
+    this.world = world;
     this.deplacementSytem.setPose(pose);
   }
 

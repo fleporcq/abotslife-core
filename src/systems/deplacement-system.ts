@@ -35,7 +35,7 @@ export class DeplacementSystem {
 
   private move(forward: boolean) {
     if (this.pose == null) {
-      throw new Error('The bot can\'t move until it has been put on a grid.');
+      throw new Error('The bot can\'t move until it has been put on a world.');
     }
     switch (this.pose.orientation) {
       case Orientation.NORTH:
@@ -55,7 +55,7 @@ export class DeplacementSystem {
 
   private rotate90(clockwise: boolean) {
     if (this.pose == null) {
-      throw new Error('The bot can\'t turn until it has been put on a grid.');
+      throw new Error('The bot can\'t turn until it has been put on a world.');
     }
     switch (this.pose.orientation) {
       case Orientation.NORTH:

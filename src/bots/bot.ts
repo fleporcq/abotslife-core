@@ -1,5 +1,5 @@
-import { Grid } from '../grid';
 import { Pose } from '../pose/pose';
+import { World } from '../world';
 
 export interface Bot {
   getName(): string;
@@ -16,7 +16,7 @@ export interface Bot {
 
   _pose();
 
-  _putOnGrid(grid: Grid, pose: Pose);
+  _putOnWorld(world: World, pose: Pose);
 
   hasNext(): boolean;
 
