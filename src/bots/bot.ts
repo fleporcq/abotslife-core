@@ -13,6 +13,8 @@ export interface Bot {
 
   right(): this;
 
+  wait(): this;
+
   _position();
 
   _orientation();

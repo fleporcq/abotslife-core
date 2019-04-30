@@ -41,6 +41,10 @@ export class BasicBot implements Bot {
     return this;
   }
 
+  public wait(): this {
+    return this;
+  }
+
   private move(forward: boolean) {
     if (this.orientation == null) {
       throw new Error('The bot can\'t move until it has been put on a grid.');

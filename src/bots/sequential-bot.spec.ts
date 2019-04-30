@@ -96,4 +96,15 @@ describe('Sequential bot', () => {
     expect(bot._position().y).toBe(4);
   });
 
+  it('{0,0:E} → ⭙ →', () => {
+    const bot = new SequentialBot('Wall-e');
+    grid.addBot(bot);
+    bot.write('FORWARD WAIT FORWARD');
+    while (bot.hasNext()) {
+      bot.next();
+    }
+    expect(bot._position().x).toBe(2);
+    expect(bot._position().y).toBe(0);
+  });
+
 });
