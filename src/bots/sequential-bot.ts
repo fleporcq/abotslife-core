@@ -1,10 +1,9 @@
 import { BasicBot } from './basic-bot';
-import { QueuedMemory } from '../memories/queued-memory';
-import { Command } from '../command';
+import { Command, CommandsQueueMemory } from '../memories/commands-queue-memory';
 
 export class SequentialBot extends BasicBot {
 
-  private memory: QueuedMemory;
+  private memory: CommandsQueueMemory;
 
   private nextStep = 0;
 
@@ -14,7 +13,7 @@ export class SequentialBot extends BasicBot {
 
   constructor(name: string) {
     super(name);
-    this.memory = new QueuedMemory();
+    this.memory = new CommandsQueueMemory();
   }
 
   public writeToMemory(buffer: string) {
@@ -60,9 +59,6 @@ export class SequentialBot extends BasicBot {
   }
 
   private execute(command: Command) {
-    if (typeof this[command] !== 'function') {
-      throw new Error('Unknown command ' + command);
-    }
     this[command]();
   }
 }

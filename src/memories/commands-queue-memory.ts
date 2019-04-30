@@ -1,7 +1,14 @@
-import { Command } from '../command';
 import { Memory } from './memory';
 
-export class QueuedMemory implements Memory {
+export enum Command {
+  FORWARD = 'forward',
+  BACKWARD = 'backward',
+  LEFT = 'left',
+  RIGHT = 'right',
+  WAIT = 'wait'
+}
+
+export class CommandsQueueMemory implements Memory {
 
   private queue: Command[] = [];
 

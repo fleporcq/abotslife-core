@@ -23,7 +23,7 @@ describe('Basic bot', () => {
     expect(right).toThrow('The bot can\'t turn until it has been put on a grid.');
   });
 
-  it('{0,0:E} → →', () => {
+  it('{0,0,E} → →', () => {
     const bot = new BasicBot('Wall-e');
     grid.addBot(bot);
     bot.forward().forward();
@@ -31,7 +31,7 @@ describe('Basic bot', () => {
     expect(bot._pose().position.y).toBe(0);
   });
 
-  it('{0,0:E} → → ←', () => {
+  it('{0,0,E} → → ←', () => {
     const bot = new BasicBot('Wall-e');
     grid.addBot(bot);
     bot.forward().forward().backward();
@@ -40,7 +40,7 @@ describe('Basic bot', () => {
   });
 
 
-  it('{0,0:E} → → ↷ →', () => {
+  it('{0,0,E} → → ↷ →', () => {
     const bot = new BasicBot('Wall-e');
     grid.addBot(bot);
     bot.forward().forward().right().forward();
@@ -49,7 +49,7 @@ describe('Basic bot', () => {
     expect(bot._pose().orientation).toBe(Orientation.SOUTH);
   });
 
-  it('{0,0:E} → ↷ → → ↶ → →', () => {
+  it('{0,0,E} → ↷ → → ↶ → →', () => {
     const bot = new BasicBot('Wall-e');
     grid.addBot(bot);
     bot.forward().right().forward().forward().left().forward().forward();
@@ -58,7 +58,7 @@ describe('Basic bot', () => {
     expect(bot._pose().orientation).toBe(Orientation.EAST);
   });
 
-  it('{3,3:S} ↷ ↷', () => {
+  it('{3,3,S} ↷ ↷', () => {
     const bot = new BasicBot('Wall-e');
     grid.addBot(bot, new Pose(3, 3, Orientation.SOUTH));
     bot.right().right();

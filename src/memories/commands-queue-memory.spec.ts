@@ -1,10 +1,9 @@
-import { QueuedMemory } from './queued-memory';
-import { Command } from '../command';
+import { Command, CommandsQueueMemory } from './commands-queue-memory';
 
-describe('QueuedMemory', () => {
+describe('CommandsQueueMemory', () => {
 
   it('should throw errors because the command is unknown', () => {
-    const memory = new QueuedMemory();
+    const memory = new CommandsQueueMemory();
     const hello = () => {
       memory.write('SAY_HELLO');
     };
@@ -12,7 +11,7 @@ describe('QueuedMemory', () => {
   });
 
   it('should writeToMemory 2 commands', () => {
-    const memory = new QueuedMemory();
+    const memory = new CommandsQueueMemory();
     memory.write('FORWARD LEFT');
     const queue = memory.getQueue();
     expect(queue.length).toBe(2);
@@ -21,7 +20,7 @@ describe('QueuedMemory', () => {
   });
 
   it('should writeToMemory a lower command', () => {
-    const memory = new QueuedMemory();
+    const memory = new CommandsQueueMemory();
     memory.write('right');
     const queue = memory.getQueue();
     expect(queue.length).toBe(1);
@@ -29,7 +28,7 @@ describe('QueuedMemory', () => {
   });
 
   it('should writeToMemory one command and be cleared', () => {
-    const memory = new QueuedMemory();
+    const memory = new CommandsQueueMemory();
     memory.write('BACKWARD');
     const queue = memory.getQueue();
     expect(queue.length).toBe(1);
@@ -39,7 +38,7 @@ describe('QueuedMemory', () => {
   });
 
   it('should works with tabs, multi space and carriage return', () => {
-    const memory = new QueuedMemory();
+    const memory = new CommandsQueueMemory();
     memory.write('right  left\nFORWARD\tbackWard');
     const queue = memory.getQueue();
     expect(queue.length).toBe(4);
