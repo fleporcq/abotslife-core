@@ -1,5 +1,5 @@
-import { Orientation } from '../../pose/orientation';
-import { Pose } from '../../pose/pose';
+import { Orientation } from '../pose/orientation';
+import { Pose } from '../pose/pose';
 
 export class DeplacementSystem {
 

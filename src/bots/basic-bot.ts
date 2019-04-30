@@ -2,7 +2,7 @@ import { Grid } from '../grid';
 import { Position } from '../pose/position';
 import { Orientation } from '../pose/orientation';
 import { Bot } from './bot';
-import { DeplacementSystem } from '../systems/deplacement/deplacement-system';
+import { DeplacementSystem } from '../systems/deplacement-system';
 import { Pose } from '../pose/pose';
 
 export class BasicBot implements Bot {
