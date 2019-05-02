@@ -6,6 +6,7 @@ import { Position } from '../../../pose/position';
 export class DeplacementSystem {
 
   private grid: Grid = null;
+
   private pose: Pose = null;
 
   constructor(grid: Grid, initialPose: Pose) {

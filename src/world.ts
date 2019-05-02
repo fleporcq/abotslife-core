@@ -1,7 +1,6 @@
 import { Grid } from './grid';
 import { Pose } from './pose/pose';
-import { Orientation } from './pose/orientation';
-import { Positionable } from './items/positionable';
+import { WorldAwareItem } from './items/world-aware-item';
 import { Actor } from './items/actor';
 import { Item } from './items/item';
 
@@ -21,18 +20,19 @@ export class World {
     return this.grid;
   }
 
-  public add(item: Item, pose: Pose = new Pose(0, 0, Orientation.EAST)) {
-    this.grid.add(item, pose.position);
-    if (this.isPositionable(item)) {
-      item.putOnWorld(this, pose);
+  public add(item: Item, pose: Pose) {
+    this.grid.add(item, pose);
+    item.setPose(pose);
+    if (this.isWorldAwareItem(item)) {
+      item.setWorld(this);
     }
     if (this.isActor(item)) {
       this.actors.push(item as Actor);
     }
   }
 
-  private isPositionable(item): item is Positionable {
-    return (item as Positionable).putOnWorld !== undefined;
+  private isWorldAwareItem(item): item is WorldAwareItem {
+    return (item as WorldAwareItem).setWorld !== undefined;
   }
 
   private isActor(item): item is Actor {

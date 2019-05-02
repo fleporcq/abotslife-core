@@ -1,5 +1,6 @@
 import { Position } from './pose/position';
 import { Item } from './items/item';
+import { Pose } from './pose/pose';
 
 export class Grid {
 
@@ -38,10 +39,12 @@ export class Grid {
     return this.get(position) === null;
   }
 
-  public add(item: Item, position: Position) {
+  public add(item: Item, pose: Pose) {
+    const position = pose.position;
     if (!this.isValidPosition(position)) {
       throw new Error(position + ' is not a valid position');
     }
+    item.setPose(pose);
     this.items[this.getPositionIndex(position)] = item;
   }
 

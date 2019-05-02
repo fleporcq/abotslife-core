@@ -1,7 +1,7 @@
 import { Grid } from './grid';
-import { Position } from './pose/position';
 import { Wall } from './items/wall';
 import { Bot } from './items/bots/bot';
+import { Pose } from './pose/pose';
 
 describe('Grid', () => {
 
@@ -31,7 +31,7 @@ describe('Grid', () => {
   it('should throw an error because the position is out of bounds', () => {
     const grid = new Grid(10, 20);
     const add = () => {
-      grid.add(null, new Position(11, 0));
+      grid.add(null, new Pose(11, 0));
     };
     expect(add).toThrow('(11,0) is not a valid position');
   });
@@ -39,11 +39,11 @@ describe('Grid', () => {
   it('should throw an error because the position is already occuped', () => {
     const grid = new Grid(10, 20);
     const add = () => {
-      const wallPosition = new Position(5, 5);
+      const wallPose = new Pose(5, 5);
       const wall = new Wall();
-      grid.add(wall, wallPosition);
-      expect(grid.get(wallPosition)).toBe(wall);
-      grid.add(new Bot(), wallPosition);
+      grid.add(wall, wallPose);
+      expect(grid.get(wallPose.position)).toBe(wall);
+      grid.add(new Bot(), wallPose);
     };
     expect(add).toThrow('(5,5) is not a valid position');
   });

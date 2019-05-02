@@ -16,16 +16,16 @@ describe('Basic bot', () => {
     const forward = () => {
       bot.forward();
     };
-    expect(forward).toThrow('The bot can\'t move until it has been put on a world');
+    expect(forward).toThrow('The item is not yet world aware');
     const right = () => {
       bot.right();
     };
-    expect(right).toThrow('The bot can\'t move until it has been put on a world');
+    expect(right).toThrow('The item is not yet world aware');
   });
 
   it('{0,0,E} → →', () => {
     const bot = new Bot();
-    world.add(bot);
+    world.add(bot, new Pose(0, 0, Orientation.EAST));
     bot.forward().forward();
     expect(bot.getPose().position.x).toBe(2);
     expect(bot.getPose().position.y).toBe(0);
@@ -33,7 +33,7 @@ describe('Basic bot', () => {
 
   it('{0,0,E} → → ←', () => {
     const bot = new Bot();
-    world.add(bot);
+    world.add(bot, new Pose(0, 0, Orientation.EAST));
     bot.forward().forward().backward();
     expect(bot.getPose().position.x).toBe(1);
     expect(bot.getPose().position.y).toBe(0);
@@ -42,7 +42,7 @@ describe('Basic bot', () => {
 
   it('{0,0,E} → → ↷ →', () => {
     const bot = new Bot();
-    world.add(bot);
+    world.add(bot, new Pose(0, 0, Orientation.EAST));
     bot.forward().forward().right().forward();
     expect(bot.getPose().position.x).toBe(2);
     expect(bot.getPose().position.y).toBe(1);
@@ -51,7 +51,7 @@ describe('Basic bot', () => {
 
   it('{0,0,E} → ↷ → → ↶ → →', () => {
     const bot = new Bot();
-    world.add(bot);
+    world.add(bot, new Pose(0, 0, Orientation.EAST));
     bot.forward().right().forward().forward().left().forward().forward();
     expect(bot.getPose().position.x).toBe(3);
     expect(bot.getPose().position.y).toBe(2);
@@ -65,12 +65,6 @@ describe('Basic bot', () => {
     expect(bot.getPose().position.x).toBe(3);
     expect(bot.getPose().position.y).toBe(3);
     expect(bot.getPose().orientation).toBe(Orientation.NORTH);
-  });
-
-  it('should do nothing', () => {
-    const bot = new Bot();
-    expect(bot.hasNext()).toBeFalsy();
-    expect(bot.next()).toBe(bot);
   });
 
 });

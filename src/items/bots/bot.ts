@@ -1,13 +1,7 @@
 import { DeplacementSystem } from './systems/deplacement-system';
-import { Pose } from '../../pose/pose';
-import { World } from '../../world';
-import { Item } from '../item';
-import { Positionable } from '../positionable';
-import { Actor } from '../actor';
+import { WorldAwareItem } from '../world-aware-item';
 
-export class Bot extends Item implements Positionable, Actor {
-
-  private world: World = null;
+export class Bot extends WorldAwareItem {
 
   private deplacementSytem: DeplacementSystem = null;
 
@@ -16,51 +10,31 @@ export class Bot extends Item implements Positionable, Actor {
   }
 
   public forward(): this {
-    this.errorIfHasNotBeenPutOnAWorld();
+    this.errorIfNotWorldAware();
     this.deplacementSytem.forward();
     return this;
   }
 
   public backward(): this {
-    this.errorIfHasNotBeenPutOnAWorld();
+    this.errorIfNotWorldAware();
     this.deplacementSytem.backward();
     return this;
   }
 
   public left(): this {
-    this.errorIfHasNotBeenPutOnAWorld();
+    this.errorIfNotWorldAware();
     this.deplacementSytem.left();
     return this;
   }
 
   public right(): this {
-    this.errorIfHasNotBeenPutOnAWorld();
+    this.errorIfNotWorldAware();
     this.deplacementSytem.right();
     return this;
   }
 
-  public putOnWorld(world: World, pose: Pose) {
-    this.world = world;
-    this.deplacementSytem = new DeplacementSystem(this.world.getGrid(), pose);
-  }
-
-  public getPose(): Pose {
-    this.errorIfHasNotBeenPutOnAWorld();
-    return this.deplacementSytem.getPose();
-  }
-
-  public hasNext(): boolean {
-    return false;
-  }
-
-  public next(): this {
-    return this;
-  }
-
-  private errorIfHasNotBeenPutOnAWorld() {
-    if (this.world == null) {
-      throw new Error('The bot can\'t move until it has been put on a world');
-    }
+  public onWorldAware() {
+    this.deplacementSytem = new DeplacementSystem(this.world.getGrid(), this.pose);
   }
 
 }

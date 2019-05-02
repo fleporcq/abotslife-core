@@ -1,7 +1,8 @@
 import { Bot } from './bot';
 import { Command, CommandsQueueMemory } from './memories/commands-queue-memory';
+import { Actor } from '../actor';
 
-export class SequentialBot extends Bot {
+export class SequentialBot extends Bot implements Actor {
 
   private memory: CommandsQueueMemory;
 

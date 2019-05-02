@@ -7,7 +7,7 @@ export class Pose {
 
   public orientation: Orientation;
 
-  constructor(x: number, y: number, orientation: Orientation) {
+  constructor(x: number, y: number, orientation?: Orientation) {
     this.position = new Position(x, y);
     this.orientation = orientation;
   }
