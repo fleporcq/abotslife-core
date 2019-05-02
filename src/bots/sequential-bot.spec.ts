@@ -13,65 +13,65 @@ describe('Sequential bot', () => {
 
   it('{0,0,E} → →', () => {
     const bot = new SequentialBot('Wall-e');
-    world.addBot(bot);
+    world.add(bot);
     bot.writeToMemory('FORWARD FORWARD');
     while (bot.hasNext()) {
       bot.next();
     }
-    expect(bot._pose().position.x).toBe(2);
-    expect(bot._pose().position.y).toBe(0);
+    expect(bot.getPose().position.x).toBe(2);
+    expect(bot.getPose().position.y).toBe(0);
   });
 
   it('{0,0,E} → → ←', () => {
     const bot = new SequentialBot('Wall-e');
-    world.addBot(bot);
+    world.add(bot);
     bot.writeToMemory('FORWARD FORWARD BACKWARD');
     while (bot.hasNext()) {
       bot.next();
     }
-    expect(bot._pose().position.x).toBe(1);
-    expect(bot._pose().position.y).toBe(0);
+    expect(bot.getPose().position.x).toBe(1);
+    expect(bot.getPose().position.y).toBe(0);
   });
 
   it('{0,0,E} → → ↷ →', () => {
     const bot = new SequentialBot('Wall-e');
-    world.addBot(bot);
+    world.add(bot);
     bot.writeToMemory('FORWARD FORWARD RIGHT FORWARD');
     while (bot.hasNext()) {
       bot.next();
     }
-    expect(bot._pose().position.x).toBe(2);
-    expect(bot._pose().position.y).toBe(1);
-    expect(bot._pose().orientation).toBe(Orientation.SOUTH);
+    expect(bot.getPose().position.x).toBe(2);
+    expect(bot.getPose().position.y).toBe(1);
+    expect(bot.getPose().orientation).toBe(Orientation.SOUTH);
   });
 
   it('{0,0,E} → ↷ → → ↶ → →', () => {
     const bot = new SequentialBot('Wall-e');
-    world.addBot(bot);
+    world.add(bot);
     bot.writeToMemory('FORWARD RIGHT FORWARD FORWARD LEFT FORWARD FORWARD');
     while (bot.hasNext()) {
       bot.next();
     }
-    expect(bot._pose().position.x).toBe(3);
-    expect(bot._pose().position.y).toBe(2);
-    expect(bot._pose().orientation).toBe(Orientation.EAST);
+    expect(bot.getPose().position.x).toBe(3);
+    expect(bot.getPose().position.y).toBe(2);
+    expect(bot.getPose().orientation).toBe(Orientation.EAST);
   });
 
   it('{3,3,S} ↷ ↷', () => {
     const bot = new SequentialBot('Wall-e');
-    world.addBot(bot, new Pose(3, 3, Orientation.SOUTH));
+    world.add(bot, new Pose(3, 3, Orientation.SOUTH));
     bot.writeToMemory('RIGHT RIGHT');
     while (bot.hasNext()) {
       bot.next();
     }
-    expect(bot._pose().position.x).toBe(3);
-    expect(bot._pose().position.y).toBe(3);
-    expect(bot._pose().orientation).toBe(Orientation.NORTH);
+    expect(bot.getPose().position.x).toBe(3);
+    expect(bot.getPose().position.y).toBe(3);
+    expect(bot.getPose().orientation).toBe(Orientation.NORTH);
   });
 
   it('{0,0,E} loop → ↷ → ↶', () => {
     const bot = new SequentialBot('Wall-e');
-    world.addBot(bot);
+    world.add(bot);
     bot.writeToMemory('FORWARD RIGHT FORWARD LEFT');
     bot.loop();
     while (bot.hasNext()) {
@@ -80,43 +80,43 @@ describe('Sequential bot', () => {
         break;
       }
     }
-    expect(bot._pose().position.x).toBe(3);
-    expect(bot._pose().position.y).toBe(3);
+    expect(bot.getPose().position.x).toBe(3);
+    expect(bot.getPose().position.y).toBe(3);
   });
 
   it('{0,0,E} loop 4 times → ↷ → ↶', () => {
     const bot = new SequentialBot('Wall-e');
-    world.addBot(bot);
+    world.add(bot);
     bot.writeToMemory('FORWARD RIGHT FORWARD LEFT');
     bot.loop(4);
     while (bot.hasNext()) {
       bot.next();
     }
-    expect(bot._pose().position.x).toBe(4);
-    expect(bot._pose().position.y).toBe(4);
+    expect(bot.getPose().position.x).toBe(4);
+    expect(bot.getPose().position.y).toBe(4);
   });
 
   it('{0,0,E} → ⭙ →', () => {
     const bot = new SequentialBot('Wall-e');
-    world.addBot(bot);
+    world.add(bot);
     bot.writeToMemory('FORWARD WAIT FORWARD');
     while (bot.hasNext()) {
       bot.next();
     }
-    expect(bot._pose().position.x).toBe(2);
-    expect(bot._pose().position.y).toBe(0);
+    expect(bot.getPose().position.x).toBe(2);
+    expect(bot.getPose().position.y).toBe(0);
   });
 
   it('clear memory', () => {
     const bot = new SequentialBot('Wall-e');
-    world.addBot(bot);
+    world.add(bot);
     bot.writeToMemory('FORWARD');
     bot.clearMemory();
     while (bot.hasNext()) {
       bot.next();
     }
-    expect(bot._pose().position.x).toBe(0);
-    expect(bot._pose().position.y).toBe(0);
+    expect(bot.getPose().position.x).toBe(0);
+    expect(bot.getPose().position.y).toBe(0);
   });
 
 });

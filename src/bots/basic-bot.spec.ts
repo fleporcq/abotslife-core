@@ -25,46 +25,46 @@ describe('Basic bot', () => {
 
   it('{0,0,E} → →', () => {
     const bot = new BasicBot('Wall-e');
-    world.addBot(bot);
+    world.add(bot);
     bot.forward().forward();
-    expect(bot._pose().position.x).toBe(2);
-    expect(bot._pose().position.y).toBe(0);
+    expect(bot.getPose().position.x).toBe(2);
+    expect(bot.getPose().position.y).toBe(0);
   });
 
   it('{0,0,E} → → ←', () => {
     const bot = new BasicBot('Wall-e');
-    world.addBot(bot);
+    world.add(bot);
     bot.forward().forward().backward();
-    expect(bot._pose().position.x).toBe(1);
-    expect(bot._pose().position.y).toBe(0);
+    expect(bot.getPose().position.x).toBe(1);
+    expect(bot.getPose().position.y).toBe(0);
   });
 
 
   it('{0,0,E} → → ↷ →', () => {
     const bot = new BasicBot('Wall-e');
-    world.addBot(bot);
+    world.add(bot);
     bot.forward().forward().right().forward();
-    expect(bot._pose().position.x).toBe(2);
-    expect(bot._pose().position.y).toBe(1);
-    expect(bot._pose().orientation).toBe(Orientation.SOUTH);
+    expect(bot.getPose().position.x).toBe(2);
+    expect(bot.getPose().position.y).toBe(1);
+    expect(bot.getPose().orientation).toBe(Orientation.SOUTH);
   });
 
   it('{0,0,E} → ↷ → → ↶ → →', () => {
     const bot = new BasicBot('Wall-e');
-    world.addBot(bot);
+    world.add(bot);
     bot.forward().right().forward().forward().left().forward().forward();
-    expect(bot._pose().position.x).toBe(3);
-    expect(bot._pose().position.y).toBe(2);
-    expect(bot._pose().orientation).toBe(Orientation.EAST);
+    expect(bot.getPose().position.x).toBe(3);
+    expect(bot.getPose().position.y).toBe(2);
+    expect(bot.getPose().orientation).toBe(Orientation.EAST);
   });
 
   it('{3,3,S} ↷ ↷', () => {
     const bot = new BasicBot('Wall-e');
-    world.addBot(bot, new Pose(3, 3, Orientation.SOUTH));
+    world.add(bot, new Pose(3, 3, Orientation.SOUTH));
     bot.right().right();
-    expect(bot._pose().position.x).toBe(3);
-    expect(bot._pose().position.y).toBe(3);
-    expect(bot._pose().orientation).toBe(Orientation.NORTH);
+    expect(bot.getPose().position.x).toBe(3);
+    expect(bot.getPose().position.y).toBe(3);
+    expect(bot.getPose().orientation).toBe(Orientation.NORTH);
   });
 
 });

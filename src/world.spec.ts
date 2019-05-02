@@ -7,9 +7,9 @@ describe('World', () => {
     const bot = new SequentialBot('Wall-e');
     bot.writeToMemory('FORWARD');
     bot.loop(5);
-    world.addBot(bot);
+    world.add(bot);
     world.fastForward(10);
     expect(world.getTickCount()).toBe(10);
-    expect(bot._pose().position.x).toBe(5);
+    expect(bot.getPose().position.x).toBe(5);
   });
 });

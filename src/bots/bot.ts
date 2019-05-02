@@ -1,7 +1,7 @@
-import { Pose } from '../pose/pose';
-import { World } from '../world';
+import { Positionable } from '../positionable';
+import { Actor } from '../actor';
 
-export interface Bot {
+export interface Bot extends Positionable, Actor {
   getName(): string;
 
   forward(): this;
@@ -13,12 +13,4 @@ export interface Bot {
   right(): this;
 
   wait(): this;
-
-  _pose();
-
-  _putOnWorld(world: World, pose: Pose);
-
-  hasNext(): boolean;
-
-  next(): this;
 }

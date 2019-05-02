@@ -1,9 +1,9 @@
 import { Grid } from './grid';
-import { BasicBot } from './bots/basic-bot';
 import { Pose } from './pose/pose';
 import { Orientation } from './pose/orientation';
 import { Clock } from './clock';
-import { Bot } from './bots/bot';
+import { Positionable } from './positionable';
+import { Actor } from './actor';
 
 export class World {
 
@@ -11,7 +11,7 @@ export class World {
 
   private clock: Clock;
 
-  private bots: Map<string, BasicBot> = new Map<string, BasicBot>();
+  private actors: Actor[] = [];
 
   public constructor(width: number, height: number) {
     this.grid = new Grid(width, height);
@@ -22,13 +22,16 @@ export class World {
     return this.grid;
   }
 
-  public addBot(bot: BasicBot, pose: Pose = new Pose(0, 0, Orientation.EAST)) {
-    bot._putOnWorld(this, pose);
-    this.bots.set(bot.getName(), bot);
+  public add(thing: Positionable, pose: Pose = new Pose(0, 0, Orientation.EAST)) {
+    thing.putOnWorld(this, pose);
+    this.grid.add(thing, pose.position);
+    if (this.isActor(thing)) {
+      this.actors.push(thing as Actor);
+    }
   }
 
-  public getBot(name: string): Bot {
-    return this.bots.get(name);
+  private isActor(thing): thing is Actor {
+    return (thing as Actor).next !== undefined;
   }
 
   public setTimeInterval(timeInterval: number) {
@@ -41,8 +44,8 @@ export class World {
 
   public next(): this {
     this.clock.tick();
-    this.bots.forEach((bot, name) => {
-      bot.next();
+    this.actors.forEach((object, name) => {
+      object.next();
     });
     return this;
   }

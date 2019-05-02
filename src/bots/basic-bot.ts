@@ -47,12 +47,12 @@ export class BasicBot implements Bot {
     return this;
   }
 
-  public _putOnWorld(world: World, pose: Pose) {
+  public putOnWorld(world: World, pose: Pose) {
     this.world = world;
     this.deplacementSytem = new DeplacementSystem(this.world.getGrid(), pose);
   }
 
-  public _pose(): Pose {
+  public getPose(): Pose {
     this.errorIfHasNotBeenPutOnAWorld();
     return this.deplacementSytem.getPose();
   }

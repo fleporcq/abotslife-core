@@ -9,4 +9,8 @@ export class Position {
     this.y = y;
   }
 
+  public toString() {
+    return '{' + this.x + ',' + this.y + '}';
+  }
+
 }
