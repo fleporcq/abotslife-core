@@ -2,10 +2,11 @@ import { World } from './world';
 import { SequentialBot } from './items/bots/sequential-bot';
 import { Pose } from './pose/pose';
 import { Orientation } from './pose/orientation';
+import { Wall } from './items/wall';
 
 describe('World', () => {
 
-  it('works', () => {
+  it('should move the bot', () => {
     const world = new World(10, 10);
     const bot = new SequentialBot();
     bot.writeToMemory('FORWARD');
@@ -35,15 +36,16 @@ describe('World', () => {
     expect(fastForward3).toThrow('count must be an integer greater or equal to 1');
   });
 
-  it('works', () => {
+  it('should throw an error because the next position is already used', () => {
     const world = new World(10, 10);
     const bot = new SequentialBot();
     bot.writeToMemory('FORWARD');
     bot.loop(5);
     world.add(bot, new Pose(0, 0, Orientation.EAST));
+    world.add(new Wall(), new Pose(5, 0));
     world.fastForward(10);
     expect(world.getTickCount()).toBe(10);
-    expect(bot.getPose().position.x).toBe(5);
+    expect(bot.getPose().position.x).toBe(4);
   });
 
 });

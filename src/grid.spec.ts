@@ -36,7 +36,7 @@ describe('Grid', () => {
     expect(add).toThrow('(11,0) is not a valid position');
   });
 
-  it('should throw an error because the position is already occuped', () => {
+  it('should throw an error because the position is already used', () => {
     const grid = new Grid(10, 20);
     const add = () => {
       const wallPose = new Pose(5, 5);
