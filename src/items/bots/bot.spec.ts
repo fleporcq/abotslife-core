@@ -1,7 +1,7 @@
-import { BasicBot } from './basic-bot';
-import { Orientation } from '../pose/orientation';
-import { Pose } from '../pose/pose';
-import { World } from '../world';
+import { Bot } from './bot';
+import { Orientation } from '../../pose/orientation';
+import { Pose } from '../../pose/pose';
+import { World } from '../../world';
 
 describe('Basic bot', () => {
 
@@ -12,7 +12,7 @@ describe('Basic bot', () => {
   });
 
   it('should throw errors because the bot is not on a world', () => {
-    const bot = new BasicBot();
+    const bot = new Bot();
     const forward = () => {
       bot.forward();
     };
@@ -24,7 +24,7 @@ describe('Basic bot', () => {
   });
 
   it('{0,0,E} → →', () => {
-    const bot = new BasicBot();
+    const bot = new Bot();
     world.add(bot);
     bot.forward().forward();
     expect(bot.getPose().position.x).toBe(2);
@@ -32,7 +32,7 @@ describe('Basic bot', () => {
   });
 
   it('{0,0,E} → → ←', () => {
-    const bot = new BasicBot();
+    const bot = new Bot();
     world.add(bot);
     bot.forward().forward().backward();
     expect(bot.getPose().position.x).toBe(1);
@@ -41,7 +41,7 @@ describe('Basic bot', () => {
 
 
   it('{0,0,E} → → ↷ →', () => {
-    const bot = new BasicBot();
+    const bot = new Bot();
     world.add(bot);
     bot.forward().forward().right().forward();
     expect(bot.getPose().position.x).toBe(2);
@@ -50,7 +50,7 @@ describe('Basic bot', () => {
   });
 
   it('{0,0,E} → ↷ → → ↶ → →', () => {
-    const bot = new BasicBot();
+    const bot = new Bot();
     world.add(bot);
     bot.forward().right().forward().forward().left().forward().forward();
     expect(bot.getPose().position.x).toBe(3);
@@ -59,7 +59,7 @@ describe('Basic bot', () => {
   });
 
   it('{3,3,S} ↷ ↷', () => {
-    const bot = new BasicBot();
+    const bot = new Bot();
     world.add(bot, new Pose(3, 3, Orientation.SOUTH));
     bot.right().right();
     expect(bot.getPose().position.x).toBe(3);
@@ -68,7 +68,7 @@ describe('Basic bot', () => {
   });
 
   it('should do nothing', () => {
-    const bot = new BasicBot();
+    const bot = new Bot();
     expect(bot.hasNext()).toBeFalsy();
     expect(bot.next()).toBe(bot);
   });

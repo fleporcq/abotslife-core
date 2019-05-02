@@ -1,7 +1,7 @@
 import { DeplacementSystem } from './deplacement-system';
-import { Orientation } from '../pose/orientation';
-import { Pose } from '../pose/pose';
-import { Grid } from '../grid';
+import { Orientation } from '../../../pose/orientation';
+import { Pose } from '../../../pose/pose';
+import { Grid } from '../../../grid';
 
 let grid = null;
 

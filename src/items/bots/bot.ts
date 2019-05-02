@@ -1,9 +1,11 @@
-import { Bot } from './bot';
-import { DeplacementSystem } from '../systems/deplacement-system';
-import { Pose } from '../pose/pose';
-import { World } from '../world';
+import { DeplacementSystem } from './systems/deplacement-system';
+import { Pose } from '../../pose/pose';
+import { World } from '../../world';
+import { Item } from '../item';
+import { Positionable } from '../positionable';
+import { Actor } from '../actor';
 
-export class BasicBot implements Bot {
+export class Bot extends Item implements Positionable, Actor {
 
   private world: World = null;
 

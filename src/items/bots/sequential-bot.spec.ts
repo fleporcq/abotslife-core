@@ -1,7 +1,7 @@
-import { Orientation } from '../pose/orientation';
-import { Pose } from '../pose/pose';
+import { Orientation } from '../../pose/orientation';
+import { Pose } from '../../pose/pose';
 import { SequentialBot } from './sequential-bot';
-import { World } from '../world';
+import { World } from '../../world';
 
 describe('Sequential bot', () => {
 

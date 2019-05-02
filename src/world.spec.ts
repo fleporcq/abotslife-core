@@ -1,5 +1,5 @@
 import { World } from './world';
-import { SequentialBot } from './bots/sequential-bot';
+import { SequentialBot } from './items/bots/sequential-bot';
 
 describe('World', () => {
 

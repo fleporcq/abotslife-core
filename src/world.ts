@@ -1,8 +1,9 @@
 import { Grid } from './grid';
 import { Pose } from './pose/pose';
 import { Orientation } from './pose/orientation';
-import { Positionable } from './positionable';
-import { Actor } from './actor';
+import { Positionable } from './items/positionable';
+import { Actor } from './items/actor';
+import { Item } from './items/item';
 
 export class World {
 
@@ -20,16 +21,22 @@ export class World {
     return this.grid;
   }
 
-  public add(thing: Positionable, pose: Pose = new Pose(0, 0, Orientation.EAST)) {
-    thing.putOnWorld(this, pose);
-    this.grid.add(thing, pose.position);
-    if (this.isActor(thing)) {
-      this.actors.push(thing as Actor);
+  public add(item: Item, pose: Pose = new Pose(0, 0, Orientation.EAST)) {
+    this.grid.add(item, pose.position);
+    if (this.isPositionable(item)) {
+      item.putOnWorld(this, pose);
+    }
+    if (this.isActor(item)) {
+      this.actors.push(item as Actor);
     }
   }
 
-  private isActor(thing): thing is Actor {
-    return (thing as Actor).next !== undefined;
+  private isPositionable(item): item is Positionable {
+    return (item as Positionable).putOnWorld !== undefined;
+  }
+
+  private isActor(item): item is Actor {
+    return (item as Actor).next !== undefined;
   }
 
   public tick() {

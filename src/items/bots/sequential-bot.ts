@@ -1,7 +1,7 @@
-import { BasicBot } from './basic-bot';
-import { Command, CommandsQueueMemory } from '../memories/commands-queue-memory';
+import { Bot } from './bot';
+import { Command, CommandsQueueMemory } from './memories/commands-queue-memory';
 
-export class SequentialBot extends BasicBot {
+export class SequentialBot extends Bot {
 
   private memory: CommandsQueueMemory;
 

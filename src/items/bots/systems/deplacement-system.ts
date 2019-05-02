@@ -1,7 +1,7 @@
-import { Orientation } from '../pose/orientation';
-import { Pose } from '../pose/pose';
-import { Grid } from '../grid';
-import { Position } from '../pose/position';
+import { Orientation } from '../../../pose/orientation';
+import { Pose } from '../../../pose/pose';
+import { Grid } from '../../../grid';
+import { Position } from '../../../pose/position';
 
 export class DeplacementSystem {
 
