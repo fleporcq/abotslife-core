@@ -1,16 +1,22 @@
 import { Orientation } from '../pose/orientation';
 import { Pose } from '../pose/pose';
+import { Grid } from '../grid';
+import { Position } from '../pose/position';
 
 export class DeplacementSystem {
 
+  private grid: Grid = null;
   private pose: Pose = null;
 
-  constructor(pose?: Pose) {
-    this.pose = pose;
-  }
-
-  public setPose(pose: Pose) {
-    this.pose = pose;
+  constructor(grid: Grid, initialPose: Pose) {
+    if (grid == null) {
+      throw new Error('Grid can\'t be null');
+    }
+    if (initialPose == null) {
+      throw new Error('Initial pose can\'t be null');
+    }
+    this.grid = grid;
+    this.pose = initialPose;
   }
 
   public getPose(): Pose {
@@ -34,29 +40,27 @@ export class DeplacementSystem {
   }
 
   private move(forward: boolean) {
-    if (this.pose == null) {
-      throw new Error('The bot can\'t move until it has been put on a world.');
-    }
+    const nexPosition = new Position(this.pose.position.x, this.pose.position.y);
     switch (this.pose.orientation) {
       case Orientation.NORTH:
-        this.pose.position.y += forward ? -1 : +1;
+        nexPosition.y += forward ? -1 : +1;
         break;
       case Orientation.EAST:
-        this.pose.position.x += forward ? +1 : -1;
+        nexPosition.x += forward ? +1 : -1;
         break;
       case Orientation.SOUTH:
-        this.pose.position.y += forward ? +1 : -1;
+        nexPosition.y += forward ? +1 : -1;
         break;
       case Orientation.WEST:
-        this.pose.position.x += forward ? -1 : +1;
+        nexPosition.x += forward ? -1 : +1;
         break;
+    }
+    if (this.grid.isValidPosition(nexPosition)) {
+      this.pose.position = nexPosition;
     }
   }
 
   private rotate90(clockwise: boolean) {
-    if (this.pose == null) {
-      throw new Error('The bot can\'t turn until it has been put on a world.');
-    }
     switch (this.pose.orientation) {
       case Orientation.NORTH:
         this.pose.orientation = clockwise ? Orientation.EAST : Orientation.WEST;

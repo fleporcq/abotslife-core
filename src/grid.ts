@@ -1,3 +1,5 @@
+import { Position } from './pose/position';
+
 export class Grid {
 
   private width: number;
@@ -20,4 +22,7 @@ export class Grid {
     return this.height;
   }
 
+  public isValidPosition(position: Position): boolean {
+    return position.x > -1 && position.x < this.width && position.y > -1 && position.y < this.height;
+  }
 }

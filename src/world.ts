@@ -13,10 +13,13 @@ export class World {
 
   private bots: Map<string, BasicBot> = new Map<string, BasicBot>();
 
-
   public constructor(width: number, height: number) {
     this.grid = new Grid(width, height);
     this.clock = new Clock(this.next.bind(this));
+  }
+
+  public getGrid(): Grid {
+    return this.grid;
   }
 
   public addBot(bot: BasicBot, pose: Pose = new Pose(0, 0, Orientation.EAST)) {

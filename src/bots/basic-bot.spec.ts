@@ -16,11 +16,11 @@ describe('Basic bot', () => {
     const forward = () => {
       bot.forward();
     };
-    expect(forward).toThrow('The bot can\'t move until it has been put on a world.');
+    expect(forward).toThrow('The bot can\'t move until it has been put on a world');
     const right = () => {
       bot.right();
     };
-    expect(right).toThrow('The bot can\'t turn until it has been put on a world.');
+    expect(right).toThrow('The bot can\'t move until it has been put on a world');
   });
 
   it('{0,0,E} → →', () => {
