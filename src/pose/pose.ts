@@ -12,4 +12,8 @@ export class Pose {
     this.orientation = orientation;
   }
 
+  public toString() {
+    return this.position + ' ' + this.orientation;
+  }
+
 }

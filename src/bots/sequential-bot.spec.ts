@@ -12,7 +12,7 @@ describe('Sequential bot', () => {
   });
 
   it('{0,0,E} → →', () => {
-    const bot = new SequentialBot('Wall-e');
+    const bot = new SequentialBot();
     world.add(bot);
     bot.writeToMemory('FORWARD FORWARD');
     while (bot.hasNext()) {
@@ -23,7 +23,7 @@ describe('Sequential bot', () => {
   });
 
   it('{0,0,E} → → ←', () => {
-    const bot = new SequentialBot('Wall-e');
+    const bot = new SequentialBot();
     world.add(bot);
     bot.writeToMemory('FORWARD FORWARD BACKWARD');
     while (bot.hasNext()) {
@@ -34,7 +34,7 @@ describe('Sequential bot', () => {
   });
 
   it('{0,0,E} → → ↷ →', () => {
-    const bot = new SequentialBot('Wall-e');
+    const bot = new SequentialBot();
     world.add(bot);
     bot.writeToMemory('FORWARD FORWARD RIGHT FORWARD');
     while (bot.hasNext()) {
@@ -46,7 +46,7 @@ describe('Sequential bot', () => {
   });
 
   it('{0,0,E} → ↷ → → ↶ → →', () => {
-    const bot = new SequentialBot('Wall-e');
+    const bot = new SequentialBot();
     world.add(bot);
     bot.writeToMemory('FORWARD RIGHT FORWARD FORWARD LEFT FORWARD FORWARD');
     while (bot.hasNext()) {
@@ -58,7 +58,7 @@ describe('Sequential bot', () => {
   });
 
   it('{3,3,S} ↷ ↷', () => {
-    const bot = new SequentialBot('Wall-e');
+    const bot = new SequentialBot();
     world.add(bot, new Pose(3, 3, Orientation.SOUTH));
     bot.writeToMemory('RIGHT RIGHT');
     while (bot.hasNext()) {
@@ -70,7 +70,7 @@ describe('Sequential bot', () => {
   });
 
   it('{0,0,E} loop → ↷ → ↶', () => {
-    const bot = new SequentialBot('Wall-e');
+    const bot = new SequentialBot();
     world.add(bot);
     bot.writeToMemory('FORWARD RIGHT FORWARD LEFT');
     bot.loop();
@@ -85,7 +85,7 @@ describe('Sequential bot', () => {
   });
 
   it('{0,0,E} loop 4 times → ↷ → ↶', () => {
-    const bot = new SequentialBot('Wall-e');
+    const bot = new SequentialBot();
     world.add(bot);
     bot.writeToMemory('FORWARD RIGHT FORWARD LEFT');
     bot.loop(4);
@@ -97,7 +97,7 @@ describe('Sequential bot', () => {
   });
 
   it('{0,0,E} → ⭙ →', () => {
-    const bot = new SequentialBot('Wall-e');
+    const bot = new SequentialBot();
     world.add(bot);
     bot.writeToMemory('FORWARD WAIT FORWARD');
     while (bot.hasNext()) {
@@ -108,7 +108,7 @@ describe('Sequential bot', () => {
   });
 
   it('clear memory', () => {
-    const bot = new SequentialBot('Wall-e');
+    const bot = new SequentialBot();
     world.add(bot);
     bot.writeToMemory('FORWARD');
     bot.clearMemory();

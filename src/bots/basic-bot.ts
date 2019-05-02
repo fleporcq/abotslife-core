@@ -5,19 +5,9 @@ import { World } from '../world';
 
 export class BasicBot implements Bot {
 
-  private name: string;
-
   private world: World = null;
 
   private deplacementSytem: DeplacementSystem = null;
-
-  constructor(name: string) {
-    this.name = name;
-  }
-
-  public getName(): string {
-    return this.name;
-  }
 
   public wait(): this {
     return this;

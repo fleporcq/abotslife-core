@@ -11,6 +11,18 @@ beforeAll(() => {
 
 describe('Deplacement system on a 100*100 grid', () => {
 
+  it('should throw errors because grid and pose cannot be null', () => {
+    const init1 = () => {
+      const ds = new DeplacementSystem(null, new Pose(0, 0, Orientation.SOUTH));
+    };
+    expect(init1).toThrow('Grid can\'t be null');
+    const init2 = () => {
+      const ds = new DeplacementSystem(new Grid(10, 10), null);
+    };
+    expect(init2).toThrow('Initial pose can\'t be null');
+  });
+
+
   it('{10,10,E} →', () => {
     const ds = new DeplacementSystem(grid, new Pose(10, 10, Orientation.EAST));
     ds.forward();

@@ -11,8 +11,8 @@ export class SequentialBot extends BasicBot {
 
   private loopCount = 0;
 
-  constructor(name: string) {
-    super(name);
+  constructor() {
+    super();
     this.memory = new CommandsQueueMemory();
   }
 
