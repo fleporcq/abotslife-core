@@ -1,5 +1,7 @@
 import { Grid } from './grid';
 import { Position } from './pose/position';
+import { Wall } from './items/wall';
+import { Bot } from './items/bots/bot';
 
 describe('Grid', () => {
 
@@ -32,5 +34,17 @@ describe('Grid', () => {
       grid.add(null, new Position(11, 0));
     };
     expect(add).toThrow('(11,0) is not a valid position');
+  });
+
+  it('should throw an error because the position is already occuped', () => {
+    const grid = new Grid(10, 20);
+    const add = () => {
+      const wallPosition = new Position(5, 5);
+      const wall = new Wall();
+      grid.add(wall, wallPosition);
+      expect(grid.get(wallPosition)).toBe(wall);
+      grid.add(new Bot(), wallPosition);
+    };
+    expect(add).toThrow('(5,5) is not a valid position');
   });
 });

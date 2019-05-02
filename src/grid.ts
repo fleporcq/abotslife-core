@@ -7,7 +7,7 @@ export class Grid {
 
   private height: number;
 
-  private cells: Item[];
+  private items: Item[];
 
   constructor(width: number, height: number) {
     if (!Number.isInteger(width) || width < 1 || !Number.isInteger(height) || height < 1) {
@@ -15,7 +15,7 @@ export class Grid {
     }
     this.width = width;
     this.height = height;
-    this.cells = new Array(width * height);
+    this.items = new Array(width * height).fill(null);
   }
 
   public getWidth(): number {
@@ -27,17 +27,29 @@ export class Grid {
   }
 
   public isValidPosition(position: Position): boolean {
+    return this.isInBound(position) && this.isEmpty(position);
+  }
+
+  public isInBound(position: Position): boolean {
     return position.x > -1 && position.x < this.width && position.y > -1 && position.y < this.height;
+  }
+
+  public isEmpty(position: Position): boolean {
+    return this.get(position) === null;
   }
 
   public add(item: Item, position: Position) {
     if (!this.isValidPosition(position)) {
       throw new Error(position + ' is not a valid position');
     }
-    this.cells[this.getCellIndex(position)] = item;
+    this.items[this.getPositionIndex(position)] = item;
   }
 
-  private getCellIndex(position: Position): number {
+  public get(position: Position): Item {
+    return this.items[this.getPositionIndex(position)];
+  }
+
+  private getPositionIndex(position: Position): number {
     return position.y * this.width + position.x;
   }
 
