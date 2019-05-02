@@ -1,7 +1,6 @@
 import { Grid } from './grid';
 import { Pose } from './pose/pose';
 import { Orientation } from './pose/orientation';
-import { Clock } from './clock';
 import { Positionable } from './positionable';
 import { Actor } from './actor';
 
@@ -9,13 +8,12 @@ export class World {
 
   private grid: Grid;
 
-  private clock: Clock;
-
   private actors: Actor[] = [];
+
+  private tickCount = 0;
 
   public constructor(width: number, height: number) {
     this.grid = new Grid(width, height);
-    this.clock = new Clock(this.next.bind(this));
   }
 
   public getGrid(): Grid {
@@ -34,29 +32,19 @@ export class World {
     return (thing as Actor).next !== undefined;
   }
 
-  public setTimeInterval(timeInterval: number) {
-    this.clock.setTimeInterval(timeInterval);
+  public tick() {
+    this.tickCount++;
   }
 
   public getTickCount(): number {
-    return this.clock.getTickCount();
+    return this.tickCount;
   }
 
   public next(): this {
-    this.clock.tick();
+    this.tick();
     this.actors.forEach((object, name) => {
       object.next();
     });
-    return this;
-  }
-
-  public start(): this {
-    this.clock.start();
-    return this;
-  }
-
-  public pause(): this {
-    this.clock.stop();
     return this;
   }
 
