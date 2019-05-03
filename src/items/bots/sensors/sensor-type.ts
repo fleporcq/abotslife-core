@@ -1,4 +1,5 @@
 export enum SensorType {
   SHOCK = 'shock',
-  COMPASS = 'compass'
+  COMPASS = 'compass',
+  DISTANCE = 'distance',
 }

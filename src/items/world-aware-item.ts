@@ -10,6 +10,10 @@ export abstract class WorldAwareItem extends Item {
     this.onWorldAware();
   }
 
+  public getWorld(): World {
+    return this.world;
+  }
+
   public abstract onWorldAware();
 
   protected errorIfNotWorldAware() {
