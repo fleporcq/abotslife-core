@@ -9,6 +9,8 @@ export class DeplacementSystem {
 
   private pose: Pose = null;
 
+  private shock = false;
+
   constructor(grid: Grid, initialPose: Pose) {
     if (grid == null) {
       throw new Error('Grid can\'t be null');
@@ -41,6 +43,7 @@ export class DeplacementSystem {
   }
 
   private move(forward: boolean) {
+    this.shock = false;
     const nexPosition = new Position(this.pose.position.x, this.pose.position.y);
     switch (this.pose.orientation) {
       case Orientation.NORTH:
@@ -58,10 +61,17 @@ export class DeplacementSystem {
     }
     if (this.grid.isValidPosition(nexPosition)) {
       this.pose.position = nexPosition;
+    } else {
+      this.shock = true;
     }
   }
 
+  public hasDetectedAShock() {
+    return this.shock;
+  }
+
   private rotate90(clockwise: boolean) {
+    this.shock = false;
     switch (this.pose.orientation) {
       case Orientation.NORTH:
         this.pose.orientation = clockwise ? Orientation.EAST : Orientation.WEST;

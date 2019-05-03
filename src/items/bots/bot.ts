@@ -33,6 +33,11 @@ export class Bot extends WorldAwareItem {
     return this;
   }
 
+  public hasDetectedAShock() {
+    this.errorIfNotWorldAware();
+    return this.deplacementSytem.hasDetectedAShock();
+  }
+
   public onWorldAware() {
     this.deplacementSytem = new DeplacementSystem(this.world.getGrid(), this.pose);
   }
