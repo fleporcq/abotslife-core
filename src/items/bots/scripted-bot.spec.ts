@@ -153,7 +153,7 @@ describe('Scripted bot', () => {
     bot.addSensor(SensorType.DISTANCE);
     world.add(bot, new Pose(1, 0, Orientation.EAST));
     world.add(new Wall(), new Pose(5, 0));
-    expect(bot.getSensor(SensorType.DISTANCE).measure()).toEqual(3);
+    expect(bot.getSensor(SensorType.DISTANCE).measure()).toBe(3);
   });
 
   it('should measure a distance of 0', () => {
@@ -161,20 +161,27 @@ describe('Scripted bot', () => {
     bot.addSensor(SensorType.DISTANCE);
     world.add(bot, new Pose(1, 0, Orientation.EAST));
     world.add(new Wall(), new Pose(2, 0));
-    expect(bot.getSensor(SensorType.DISTANCE).measure()).toEqual(0);
+    expect(bot.getSensor(SensorType.DISTANCE).measure()).toBe(0);
   });
 
   it('should measure a distance of 5', () => {
     const bot = new ScriptedBot();
     bot.addSensor(SensorType.DISTANCE);
     world.add(bot, new Pose(4, 0, Orientation.EAST));
-    expect(bot.getSensor(SensorType.DISTANCE).measure()).toEqual(5);
+    expect(bot.getSensor(SensorType.DISTANCE).measure()).toBe(5);
   });
 
   it('should measure a distance of infinity', () => {
     const bot = new ScriptedBot();
     bot.addSensor(SensorType.DISTANCE);
     world.add(bot, new Pose(0, 0, Orientation.EAST));
-    expect(bot.getSensor(SensorType.DISTANCE).measure()).toEqual(Infinity);
+    expect(bot.getSensor(SensorType.DISTANCE).measure()).toBe(Infinity);
+  });
+
+  it('should retrieve its position', () => {
+    const bot = new ScriptedBot();
+    bot.addSensor(SensorType.POSITION);
+    world.add(bot, new Pose(1, 3, Orientation.EAST));
+    expect(bot.getSensor(SensorType.POSITION).measure()).toEqual({ x: 1, y: 3 });
   });
 });
