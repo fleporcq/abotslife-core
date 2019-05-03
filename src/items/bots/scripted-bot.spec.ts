@@ -127,4 +127,24 @@ describe('Scripted bot', () => {
     world.fastForward(8);
     expect(bot.getPose()).toEqual({ position: { x: 2, y: 0 }, orientation: 'WEST' });
   });
+
+  it('should toggle backward/forward after shock', () => {
+    const bot = new ScriptedBot();
+    bot.addSensor(SensorType.SHOCK);
+    world.add(bot, new Pose(0, 0, Orientation.EAST));
+    world.add(new Wall(), new Pose(5, 0));
+    bot.writeToMemory(`
+      let goToFront = false
+      if(sensor('shock').measure()){
+        goToFront =! goToFront;
+      }
+      if (goToFront) {
+        forward();
+      } else {
+        backward();
+      }
+    `);
+    world.fastForward(8);
+    expect(bot.getPose()).toEqual({ position: { x: 1, y: 0 }, orientation: 'EAST' });
+  });
 });
