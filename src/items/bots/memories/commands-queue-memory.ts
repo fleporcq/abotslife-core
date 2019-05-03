@@ -3,8 +3,9 @@ import { Memory } from './memory';
 export enum Command {
   FORWARD = 'forward',
   BACKWARD = 'backward',
-  LEFT = 'left',
-  RIGHT = 'right',
+  TURN_LEFT = 'turnLeft',
+  TURN_RIGHT = 'turnRight',
+  TURN_BACK = 'turnBack',
   WAIT = 'wait'
 }
 

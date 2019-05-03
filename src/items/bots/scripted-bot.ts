@@ -69,13 +69,17 @@ export class ScriptedBot extends Bot implements Actor {
       moveCount++;
       this.backward();
     };
-    const left = () => {
+    const turnLeft = () => {
       moveCount++;
-      this.left();
+      this.turnLeft();
     };
-    const right = () => {
+    const turnRight = () => {
       moveCount++;
-      this.right();
+      this.turnRight();
+    };
+    const turnBack = () => {
+      moveCount++;
+      this.turnBack();
     };
     const wait = () => {
       moveCount++;

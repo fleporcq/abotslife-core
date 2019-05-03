@@ -3,8 +3,9 @@ import { World } from '../../world';
 import { Pose } from '../../pose/pose';
 import { Orientation } from '../../pose/orientation';
 import { SensorType } from './sensors/sensor-type';
+import { Wall } from '../wall';
 
-describe('Sequential bot', () => {
+describe('Scripted bot', () => {
   let world;
 
   beforeEach(() => {
@@ -87,7 +88,7 @@ describe('Sequential bot', () => {
     world.add(bot, new Pose(0, 0, Orientation.EAST));
     bot.writeToMemory(`
       if(sensor('shock').measure()){
-        right();
+        turnRight();
       } else {
         forward();
       }
@@ -102,12 +103,28 @@ describe('Sequential bot', () => {
     world.add(bot, new Pose(0, 0, Orientation.SOUTH));
     bot.writeToMemory(`
       if(sensor('compass').measure() == 'SOUTH'){
-        right();
+        turnRight();
       }
     `);
     world.next();
     expect(bot.getPose()).toEqual({ position: { x: 0, y: 0 }, orientation: 'WEST' });
     world.next();
     expect(bot.getPose()).toEqual({ position: { x: 0, y: 0 }, orientation: 'WEST' });
+  });
+
+  it('should turn back after shock', () => {
+    const bot = new ScriptedBot();
+    bot.addSensor(SensorType.SHOCK);
+    world.add(bot, new Pose(0, 0, Orientation.EAST));
+    world.add(new Wall(), new Pose(5, 0));
+    bot.writeToMemory(`
+      if(sensor('shock').measure()){
+        turnBack();
+      } else {
+        forward();
+      }
+    `);
+    world.fastForward(8);
+    expect(bot.getPose()).toEqual({ position: { x: 2, y: 0 }, orientation: 'WEST' });
   });
 });

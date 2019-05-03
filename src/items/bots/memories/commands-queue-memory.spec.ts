@@ -12,19 +12,19 @@ describe('CommandsQueueMemory', () => {
 
   it('should writeToMemory 2 commands', () => {
     const memory = new CommandsQueueMemory();
-    memory.write('FORWARD LEFT');
+    memory.write('FORWARD TURN_LEFT');
     const queue = memory.getQueue();
     expect(queue.length).toBe(2);
     expect(queue[0]).toBe(Command.FORWARD);
-    expect(queue[1]).toBe(Command.LEFT);
+    expect(queue[1]).toBe(Command.TURN_LEFT);
   });
 
   it('should writeToMemory a lower command', () => {
     const memory = new CommandsQueueMemory();
-    memory.write('right');
+    memory.write('turn_right');
     const queue = memory.getQueue();
     expect(queue.length).toBe(1);
-    expect(queue[0]).toBe(Command.RIGHT);
+    expect(queue[0]).toBe(Command.TURN_RIGHT);
   });
 
   it('should writeToMemory one command and be cleared', () => {
@@ -39,11 +39,11 @@ describe('CommandsQueueMemory', () => {
 
   it('should works with tabs, multi space and carriage return', () => {
     const memory = new CommandsQueueMemory();
-    memory.write('right  left\nFORWARD\tbackWard');
+    memory.write('turn_right  TURN_LEFT\nFORWARD\tbackWard');
     const queue = memory.getQueue();
     expect(queue.length).toBe(4);
-    expect(queue[0]).toBe(Command.RIGHT);
-    expect(queue[1]).toBe(Command.LEFT);
+    expect(queue[0]).toBe(Command.TURN_RIGHT);
+    expect(queue[1]).toBe(Command.TURN_LEFT);
     expect(queue[2]).toBe(Command.FORWARD);
     expect(queue[3]).toBe(Command.BACKWARD);
   });

@@ -18,7 +18,7 @@ describe('Basic bot', () => {
     };
     expect(forward).toThrow('The item is not yet world aware');
     const right = () => {
-      bot.right();
+      bot.turnRight();
     };
     expect(right).toThrow('The item is not yet world aware');
   });
@@ -43,7 +43,7 @@ describe('Basic bot', () => {
   it('{0,0,E} → → ↷ →', () => {
     const bot = new Bot();
     world.add(bot, new Pose(0, 0, Orientation.EAST));
-    bot.forward().forward().right().forward();
+    bot.forward().forward().turnRight().forward();
     expect(bot.getPose().position.x).toBe(2);
     expect(bot.getPose().position.y).toBe(1);
     expect(bot.getPose().orientation).toBe(Orientation.SOUTH);
@@ -52,7 +52,7 @@ describe('Basic bot', () => {
   it('{0,0,E} → ↷ → → ↶ → →', () => {
     const bot = new Bot();
     world.add(bot, new Pose(0, 0, Orientation.EAST));
-    bot.forward().right().forward().forward().left().forward().forward();
+    bot.forward().turnRight().forward().forward().turnLeft().forward().forward();
     expect(bot.getPose().position.x).toBe(3);
     expect(bot.getPose().position.y).toBe(2);
     expect(bot.getPose().orientation).toBe(Orientation.EAST);
@@ -61,7 +61,7 @@ describe('Basic bot', () => {
   it('{3,3,S} ↷ ↷', () => {
     const bot = new Bot();
     world.add(bot, new Pose(3, 3, Orientation.SOUTH));
-    bot.right().right();
+    bot.turnRight().turnRight();
     expect(bot.getPose().position.x).toBe(3);
     expect(bot.getPose().position.y).toBe(3);
     expect(bot.getPose().orientation).toBe(Orientation.NORTH);

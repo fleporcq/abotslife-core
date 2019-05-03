@@ -34,12 +34,17 @@ export class DeplacementSystem {
     this.move(false);
   }
 
-  public right() {
+  public turnRight() {
     this.rotate90(true);
   }
 
-  public left() {
+  public turnLeft() {
     this.rotate90(false);
+  }
+
+  public turnBack() {
+    this.turnRight();
+    this.turnRight();
   }
 
   private move(forward: boolean) {

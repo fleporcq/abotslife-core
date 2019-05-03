@@ -21,15 +21,21 @@ export class Bot extends WorldAwareItem {
     return this;
   }
 
-  public left(): this {
+  public turnLeft(): this {
     this.errorIfNotWorldAware();
-    this.deplacementSytem.left();
+    this.deplacementSytem.turnLeft();
     return this;
   }
 
-  public right(): this {
+  public turnRight(): this {
     this.errorIfNotWorldAware();
-    this.deplacementSytem.right();
+    this.deplacementSytem.turnRight();
+    return this;
+  }
+
+  public turnBack(): this {
+    this.errorIfNotWorldAware();
+    this.deplacementSytem.turnBack();
     return this;
   }
 

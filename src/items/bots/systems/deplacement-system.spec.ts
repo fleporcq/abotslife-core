@@ -138,49 +138,49 @@ describe('Deplacement system on a 100*100 grid', () => {
 
   it('{0,0,E} ↷', () => {
     const ds = new DeplacementSystem(grid, new Pose(0, 0, Orientation.EAST));
-    ds.right();
+    ds.turnRight();
     expect(ds.getPose().orientation).toBe(Orientation.SOUTH);
   });
 
   it('{0,0,S} ↷', () => {
     const ds = new DeplacementSystem(grid, new Pose(0, 0, Orientation.SOUTH));
-    ds.right();
+    ds.turnRight();
     expect(ds.getPose().orientation).toBe(Orientation.WEST);
   });
 
   it('{0,0,W} ↷', () => {
     const ds = new DeplacementSystem(grid, new Pose(0, 0, Orientation.WEST));
-    ds.right();
+    ds.turnRight();
     expect(ds.getPose().orientation).toBe(Orientation.NORTH);
   });
 
   it('{0,0,N} ↷', () => {
     const ds = new DeplacementSystem(grid, new Pose(0, 0, Orientation.NORTH));
-    ds.right();
+    ds.turnRight();
     expect(ds.getPose().orientation).toBe(Orientation.EAST);
   });
 
   it('{0,0,E} ↶', () => {
     const ds = new DeplacementSystem(grid, new Pose(0, 0, Orientation.EAST));
-    ds.left();
+    ds.turnLeft();
     expect(ds.getPose().orientation).toBe(Orientation.NORTH);
   });
 
   it('{0,0,S} ↶', () => {
     const ds = new DeplacementSystem(grid, new Pose(0, 0, Orientation.SOUTH));
-    ds.left();
+    ds.turnLeft();
     expect(ds.getPose().orientation).toBe(Orientation.EAST);
   });
 
   it('{0,0,W} ↶', () => {
     const ds = new DeplacementSystem(grid, new Pose(0, 0, Orientation.WEST));
-    ds.left();
+    ds.turnLeft();
     expect(ds.getPose().orientation).toBe(Orientation.SOUTH);
   });
 
   it('{0,0,N} ↶', () => {
     const ds = new DeplacementSystem(grid, new Pose(0, 0, Orientation.NORTH));
-    ds.left();
+    ds.turnLeft();
     expect(ds.getPose().orientation).toBe(Orientation.WEST);
   });
 });
