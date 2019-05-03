@@ -17,8 +17,8 @@ export class SequentialBot extends Bot implements Actor {
     this.memory = new CommandsQueueMemory();
   }
 
-  public writeToMemory(buffer: string) {
-    this.memory.write(buffer);
+  public writeToMemory(program: string) {
+    this.memory.write(program);
     return this;
   }
 

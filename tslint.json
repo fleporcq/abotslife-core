@@ -38,6 +38,7 @@
       "trace"
     ],
     "no-empty": false,
+    "no-eval": false,
     "no-inferrable-types": [
       true,
       "ignore-params"
