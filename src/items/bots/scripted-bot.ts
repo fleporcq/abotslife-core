@@ -1,7 +1,6 @@
 import { Bot } from './bot';
 import { Actor } from '../actor';
 import { ScriptMemory } from './memories/script-memory';
-import * as ts from 'typescript';
 import { SensorType } from './sensors/sensor-type';
 import { Sensor } from './sensors/sensor';
 import { SensorFactory } from './sensors/sensor-factory';
@@ -94,7 +93,7 @@ export class ScriptedBot extends Bot implements Actor {
       return this.getSensor(sensorType);
     };
 
-    eval(ts.transpile(script));
+    eval(script);
 
     if (moveCount > 1) {
       throw new Error('The bot cannot move more than once');
