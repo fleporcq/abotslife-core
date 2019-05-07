@@ -1,7 +1,15 @@
 import { Pose } from '../pose/pose';
+import { ItemType } from './item-type';
 
 export abstract class Item {
+
+  protected type: ItemType;
+
   protected pose: Pose;
+
+  constructor(type: ItemType) {
+    this.type = type;
+  }
 
   public getPose(): Pose {
     return this.pose;
@@ -9,5 +17,9 @@ export abstract class Item {
 
   public setPose(pose: Pose) {
     this.pose = pose;
+  }
+
+  public getType(): ItemType {
+    return this.type;
   }
 }

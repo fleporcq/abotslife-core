@@ -1,9 +1,14 @@
 import { DeplacementSystem } from './systems/deplacement-system';
 import { WorldAwareItem } from '../world-aware-item';
+import { ItemType } from '../item-type';
 
 export class Bot extends WorldAwareItem {
 
   private deplacementSytem: DeplacementSystem = null;
+
+  constructor() {
+    super(ItemType.BOT);
+  }
 
   public wait(): this {
     return this;
