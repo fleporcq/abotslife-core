@@ -49,7 +49,9 @@ export class DeplacementSystem {
 
   private move(forward: boolean) {
     this.shock = false;
-    const nexPosition = new Position(this.pose.position.x, this.pose.position.y);
+    const x = this.pose.position.x;
+    const y = this.pose.position.y;
+    const nexPosition = new Position(x, y);
     switch (this.pose.orientation) {
       case Orientation.NORTH:
         nexPosition.y += forward ? -1 : +1;
@@ -66,6 +68,8 @@ export class DeplacementSystem {
     }
     if (this.grid.isValidPosition(nexPosition)) {
       this.pose.position = nexPosition;
+      const oldPosition = new Position(x, y);
+      this.grid.update(oldPosition);
     } else {
       this.shock = true;
     }

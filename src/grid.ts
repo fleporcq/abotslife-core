@@ -47,9 +47,23 @@ export class Grid {
     this.items[this.getPositionIndex(position)] = item;
   }
 
+  public update(position: Position) {
+    this.errorIfOutOfBounds(position);
+    const item = this.get(position);
+    if (item != null && (item.getPose().position.x !== position.x || item.getPose().position.y !== position.y)) {
+      this.clear(position);
+      this.add(item, item.getPose());
+    }
+  }
+
   public get(position: Position): Item {
     this.errorIfOutOfBounds(position);
     return this.items[this.getPositionIndex(position)];
+  }
+
+  public clear(position: Position) {
+    this.errorIfOutOfBounds(position);
+    this.items[this.getPositionIndex(position)] = null;
   }
 
   private getPositionIndex(position: Position): number {

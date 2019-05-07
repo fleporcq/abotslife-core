@@ -94,17 +94,17 @@ describe('Deplacement system on a 100*100 grid', () => {
   });
 
 
-  it('{100,0,E} ←', () => {
-    const ds = new DeplacementSystem(grid, new Pose(100, 0, Orientation.EAST));
+  it('{99,0,E} ←', () => {
+    const ds = new DeplacementSystem(grid, new Pose(99, 0, Orientation.EAST));
     ds.backward();
-    expect(ds.getPose().position.x).toBe(99);
+    expect(ds.getPose().position.x).toBe(98);
     expect(ds.getPose().position.y).toBe(0);
   });
 
-  it('{100,0,E} →', () => {
-    const ds = new DeplacementSystem(grid, new Pose(100, 0, Orientation.EAST));
+  it('{98,0,E} →', () => {
+    const ds = new DeplacementSystem(grid, new Pose(98, 0, Orientation.EAST));
     ds.forward();
-    expect(ds.getPose().position.x).toBe(100);
+    expect(ds.getPose().position.x).toBe(99);
     expect(ds.getPose().position.y).toBe(0);
   });
 
@@ -122,18 +122,18 @@ describe('Deplacement system on a 100*100 grid', () => {
     expect(ds.getPose().position.y).toBe(0);
   });
 
-  it('{0,100,S} ←', () => {
-    const ds = new DeplacementSystem(grid, new Pose(0, 100, Orientation.SOUTH));
+  it('{0,99,S} ←', () => {
+    const ds = new DeplacementSystem(grid, new Pose(0, 99, Orientation.SOUTH));
     ds.backward();
     expect(ds.getPose().position.x).toBe(0);
-    expect(ds.getPose().position.y).toBe(99);
+    expect(ds.getPose().position.y).toBe(98);
   });
 
-  it('{0,100,S} →', () => {
-    const ds = new DeplacementSystem(grid, new Pose(0, 100, Orientation.SOUTH));
+  it('{0,98,S} →', () => {
+    const ds = new DeplacementSystem(grid, new Pose(0, 98, Orientation.SOUTH));
     ds.forward();
     expect(ds.getPose().position.x).toBe(0);
-    expect(ds.getPose().position.y).toBe(100);
+    expect(ds.getPose().position.y).toBe(99);
   });
 
   it('{0,0,E} ↷', () => {
