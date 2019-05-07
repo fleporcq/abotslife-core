@@ -9,7 +9,7 @@ describe('World', () => {
   it('should move the bot', () => {
     const world = new World(10, 10);
     const bot = new SequentialBot();
-    bot.writeToMemory('FORWARD');
+    bot.flash('FORWARD');
     bot.loop(5);
     world.add(bot, new Pose(0, 0, Orientation.EAST));
     world.fastForward(10);
@@ -39,7 +39,7 @@ describe('World', () => {
   it('should throw an error because the next position is already used', () => {
     const world = new World(10, 10);
     const bot = new SequentialBot();
-    bot.writeToMemory('FORWARD');
+    bot.flash('FORWARD');
     bot.loop(5);
     world.add(bot, new Pose(0, 0, Orientation.EAST));
     world.add(new Wall(), new Pose(5, 0));

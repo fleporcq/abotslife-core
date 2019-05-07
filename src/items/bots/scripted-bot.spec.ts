@@ -15,24 +15,24 @@ describe('Scripted bot', () => {
   it('{3,3,E} → →', () => {
     const bot = new ScriptedBot();
     world.add(bot, new Pose(3, 3, Orientation.EAST));
-    bot.writeToMemory('forward();');
+    bot.flash('forward();');
     world.fastForward(2);
     expect(bot.getPose().position.x).toBe(5);
   });
 
-  it('should throw an error because the script cannot contain this', () => {
+  it('should throw an error because the firmware cannot contain this', () => {
     const bot = new ScriptedBot();
     world.add(bot, new Pose(0, 0, Orientation.EAST));
     const fail = () => {
-      bot.writeToMemory('this.forward();');
+      bot.flash('this.forward();');
     };
-    expect(fail).toThrow('The script cannot contain \'this\' keyword');
+    expect(fail).toThrow('The firmware cannot contain \'this\' keyword');
   });
 
   it('should throw an error because the bot cannot move more than once', () => {
     const bot = new ScriptedBot();
     world.add(bot, new Pose(0, 0, Orientation.EAST));
-    bot.writeToMemory('forward();backward();');
+    bot.flash('forward();backward();');
     const fail = () => {
       world.next();
     };
@@ -65,7 +65,7 @@ describe('Scripted bot', () => {
   it('should throw an error because the stuff sensor is unknown', () => {
     const bot = new ScriptedBot();
     world.add(bot, new Pose(0, 0, Orientation.EAST));
-    bot.writeToMemory('sensor(\'stuff\');');
+    bot.flash('sensor(\'stuff\');');
     const fail = () => {
       world.next();
     };
@@ -75,7 +75,7 @@ describe('Scripted bot', () => {
   it('should throw an error because the sensor is on a bot not aware of the world', () => {
     const bot = new ScriptedBot();
     bot.addSensor(SensorType.SHOCK);
-    bot.writeToMemory('sensor(\'shock\').measure();');
+    bot.flash('sensor(\'shock\').measure();');
     const fail = () => {
       bot.next();
     };
@@ -86,7 +86,7 @@ describe('Scripted bot', () => {
     const bot = new ScriptedBot();
     bot.addSensor(SensorType.SHOCK);
     world.add(bot, new Pose(0, 0, Orientation.EAST));
-    bot.writeToMemory(`
+    bot.flash(`
       if(sensor('shock').measure()){
         turnRight();
       } else {
@@ -101,7 +101,7 @@ describe('Scripted bot', () => {
     const bot = new ScriptedBot();
     bot.addSensor(SensorType.COMPASS);
     world.add(bot, new Pose(0, 0, Orientation.SOUTH));
-    bot.writeToMemory(`
+    bot.flash(`
       if(sensor('compass').measure() == 'SOUTH'){
         turnRight();
       }
@@ -117,7 +117,7 @@ describe('Scripted bot', () => {
     bot.addSensor(SensorType.SHOCK);
     world.add(bot, new Pose(0, 0, Orientation.EAST));
     world.add(new Wall(), new Pose(5, 0));
-    bot.writeToMemory(`
+    bot.flash(`
       if(sensor('shock').measure()){
         turnBack();
       } else {
@@ -133,7 +133,7 @@ describe('Scripted bot', () => {
     bot.addSensor(SensorType.SHOCK);
     world.add(bot, new Pose(0, 0, Orientation.EAST));
     world.add(new Wall(), new Pose(5, 0));
-    bot.writeToMemory(`
+    bot.flash(`
       let goToFront = false
       if(sensor('shock').measure()){
         goToFront =! goToFront;

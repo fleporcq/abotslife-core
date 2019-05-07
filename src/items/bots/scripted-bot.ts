@@ -1,31 +1,31 @@
 import { Bot } from './bot';
 import { Actor } from '../actor';
-import { ScriptMemory } from './memories/script-memory';
+import { ScriptRom } from './memories/script-rom';
 import { SensorType } from './sensors/sensor-type';
 import { Sensor } from './sensors/sensor';
 import { SensorFactory } from './sensors/sensor-factory';
 
 export class ScriptedBot extends Bot implements Actor {
 
-  private memory: ScriptMemory;
+  private rom: ScriptRom;
 
   private sensors = new Map<SensorType, Sensor>();
 
   constructor() {
     super();
-    this.memory = new ScriptMemory();
+    this.rom = new ScriptRom();
   }
 
-  public writeToMemory(script: string) {
-    if (script.includes('this')) {
-      throw new Error('The script cannot contain \'this\' keyword');
+  public flash(firmware: string) {
+    if (firmware.includes('this')) {
+      throw new Error('The firmware cannot contain \'this\' keyword');
     }
-    this.memory.write(script);
+    this.rom.flash(firmware);
     return this;
   }
 
-  public clearMemory() {
-    this.memory.clear();
+  public clear() {
+    this.rom.clear();
     return this;
   }
 
@@ -34,7 +34,7 @@ export class ScriptedBot extends Bot implements Actor {
   }
 
   public next(): this {
-    this.execute(this.memory.getScript());
+    this.execute(this.rom.getFirmware());
     return this;
   }
 

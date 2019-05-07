@@ -1,10 +1,10 @@
 import { Bot } from './bot';
-import { Command, CommandsQueueMemory } from './memories/commands-queue-memory';
+import { Command, CommandsQueueRom } from './memories/commands-queue-rom';
 import { Actor } from '../actor';
 
 export class SequentialBot extends Bot implements Actor {
 
-  private memory: CommandsQueueMemory;
+  private rom: CommandsQueueRom;
 
   private nextStep = 0;
 
@@ -14,11 +14,11 @@ export class SequentialBot extends Bot implements Actor {
 
   constructor() {
     super();
-    this.memory = new CommandsQueueMemory();
+    this.rom = new CommandsQueueRom();
   }
 
-  public writeToMemory(program: string) {
-    this.memory.write(program);
+  public flash(program: string) {
+    this.rom.flash(program);
     return this;
   }
 
@@ -27,18 +27,18 @@ export class SequentialBot extends Bot implements Actor {
     return this;
   }
 
-  public clearMemory() {
-    this.memory.clear();
+  public clear() {
+    this.rom.clear();
     return this;
   }
 
   public hasNext(): boolean {
-    return this.nextStep != null && this.nextStep < this.memory.size();
+    return this.nextStep != null && this.nextStep < this.rom.size();
   }
 
   public next(): this {
     if (this.hasNext()) {
-      this.execute(this.memory.get(this.nextStep));
+      this.execute(this.rom.get(this.nextStep));
       this.nextStep = this.prepareNextStep();
     }
     return this;
@@ -49,7 +49,7 @@ export class SequentialBot extends Bot implements Actor {
   }
 
   private prepareNextStep() {
-    if (this.nextStep + 1 === this.memory.size()) {
+    if (this.nextStep + 1 === this.rom.size()) {
       this.loopCount++;
       if (this.loopCount < this.looped) {
         return 0;

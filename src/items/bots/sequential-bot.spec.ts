@@ -14,7 +14,7 @@ describe('Sequential bot', () => {
   it('{0,0,E} → →', () => {
     const bot = new SequentialBot();
     world.add(bot, new Pose(0, 0, Orientation.EAST));
-    bot.writeToMemory('FORWARD FORWARD');
+    bot.flash('FORWARD FORWARD');
     while (bot.hasNext()) {
       bot.next();
     }
@@ -25,7 +25,7 @@ describe('Sequential bot', () => {
   it('{0,0,E} → → ←', () => {
     const bot = new SequentialBot();
     world.add(bot, new Pose(0, 0, Orientation.EAST));
-    bot.writeToMemory('FORWARD FORWARD BACKWARD');
+    bot.flash('FORWARD FORWARD BACKWARD');
     while (bot.hasNext()) {
       bot.next();
     }
@@ -36,7 +36,7 @@ describe('Sequential bot', () => {
   it('{0,0,E} → → ↷ →', () => {
     const bot = new SequentialBot();
     world.add(bot, new Pose(0, 0, Orientation.EAST));
-    bot.writeToMemory('FORWARD FORWARD TURN_RIGHT FORWARD');
+    bot.flash('FORWARD FORWARD TURN_RIGHT FORWARD');
     while (bot.hasNext()) {
       bot.next();
     }
@@ -48,7 +48,7 @@ describe('Sequential bot', () => {
   it('{0,0,E} → ↷ → → ↶ → →', () => {
     const bot = new SequentialBot();
     world.add(bot, new Pose(0, 0, Orientation.EAST));
-    bot.writeToMemory('FORWARD TURN_RIGHT FORWARD FORWARD TURN_LEFT FORWARD FORWARD');
+    bot.flash('FORWARD TURN_RIGHT FORWARD FORWARD TURN_LEFT FORWARD FORWARD');
     while (bot.hasNext()) {
       bot.next();
     }
@@ -60,7 +60,7 @@ describe('Sequential bot', () => {
   it('{3,3,S} ↷ ↷', () => {
     const bot = new SequentialBot();
     world.add(bot, new Pose(3, 3, Orientation.SOUTH));
-    bot.writeToMemory('TURN_RIGHT TURN_RIGHT');
+    bot.flash('TURN_RIGHT TURN_RIGHT');
     while (bot.hasNext()) {
       bot.next();
     }
@@ -72,7 +72,7 @@ describe('Sequential bot', () => {
   it('{0,0,E} loop → ↷ → ↶', () => {
     const bot = new SequentialBot();
     world.add(bot, new Pose(0, 0, Orientation.EAST));
-    bot.writeToMemory('FORWARD TURN_RIGHT FORWARD TURN_LEFT');
+    bot.flash('FORWARD TURN_RIGHT FORWARD TURN_LEFT');
     bot.loop();
     while (bot.hasNext()) {
       bot.next();
@@ -87,7 +87,7 @@ describe('Sequential bot', () => {
   it('{0,0,E} loop 4 times → ↷ → ↶', () => {
     const bot = new SequentialBot();
     world.add(bot, new Pose(0, 0, Orientation.EAST));
-    bot.writeToMemory('FORWARD TURN_RIGHT FORWARD TURN_LEFT');
+    bot.flash('FORWARD TURN_RIGHT FORWARD TURN_LEFT');
     bot.loop(4);
     while (bot.hasNext()) {
       bot.next();
@@ -99,7 +99,7 @@ describe('Sequential bot', () => {
   it('{0,0,E} → ⭙ →', () => {
     const bot = new SequentialBot();
     world.add(bot, new Pose(0, 0, Orientation.EAST));
-    bot.writeToMemory('FORWARD WAIT FORWARD');
+    bot.flash('FORWARD WAIT FORWARD');
     while (bot.hasNext()) {
       bot.next();
     }
@@ -107,11 +107,11 @@ describe('Sequential bot', () => {
     expect(bot.getPose().position.y).toBe(0);
   });
 
-  it('clear memory', () => {
+  it('clear rom', () => {
     const bot = new SequentialBot();
     world.add(bot, new Pose(0, 0, Orientation.EAST));
-    bot.writeToMemory('FORWARD');
-    bot.clearMemory();
+    bot.flash('FORWARD');
+    bot.clear();
     while (bot.hasNext()) {
       bot.next();
     }

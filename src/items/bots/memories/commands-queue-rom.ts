@@ -1,4 +1,4 @@
-import { Memory } from './memory';
+import { Rom } from './rom';
 
 export enum Command {
   FORWARD = 'forward',
@@ -9,7 +9,7 @@ export enum Command {
   WAIT = 'wait'
 }
 
-export class CommandsQueueMemory implements Memory {
+export class CommandsQueueRom implements Rom {
 
   private queue: Command[] = [];
 
@@ -17,8 +17,8 @@ export class CommandsQueueMemory implements Memory {
     return this.queue;
   }
 
-  public write(program: string) {
-    const commandValues = this.split(program);
+  public flash(firmware: string) {
+    const commandValues = this.split(firmware);
     for (const value of commandValues) {
       const command = Command[value.toUpperCase()];
       if (command == null) {
