@@ -5,7 +5,6 @@ export * from './pose/orientation';
 export * from './pose/position';
 export * from './items/item';
 export * from './items/world-aware-item';
-export * from './items/actor';
 export * from './items/wall';
 export * from './items/bots/bot';
 export * from './items/bots/scripted-bot';
@@ -17,3 +16,4 @@ export * from './items/bots/sensors/compass-sensor';
 export * from './items/bots/sensors/distance-sensor';
 export * from './items/bots/sensors/position-sensor';
 export * from './items/bots/sensors/shock-sensor';
+//# sourceMappingURL=index.js.map
