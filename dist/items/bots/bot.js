@@ -1,10 +1,11 @@
 import * as tslib_1 from "tslib";
 import { DeplacementSystem } from './systems/deplacement-system';
 import { WorldAwareItem } from '../world-aware-item';
+import { ItemType } from '../item-type';
 var Bot = /** @class */ (function (_super) {
     tslib_1.__extends(Bot, _super);
     function Bot() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super.call(this, ItemType.BOT) || this;
         _this.deplacementSytem = null;
         return _this;
     }

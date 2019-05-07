@@ -4,6 +4,7 @@ export * from './pose/pose';
 export * from './pose/orientation';
 export * from './pose/position';
 export * from './items/item';
+export * from './items/item-type';
 export * from './items/world-aware-item';
 export * from './items/actor';
 export * from './items/wall';
