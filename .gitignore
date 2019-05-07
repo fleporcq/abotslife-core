@@ -1,14 +1,8 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.
-
-# compiled output
-/dist
-
 # test coverage output
 /coverage
 
 # dependencies
 /node_modules
-
 
 # IDEs and editors
 /.idea
@@ -26,7 +20,6 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 .history/*
-
 
 # misc
 npm-debug.log

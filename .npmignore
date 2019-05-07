@@ -1,0 +1,8 @@
+# sources
+/src
+
+.codeclimate.yml
+.travis.yml
+jest.config.js
+tsconfig.json
+tslint.json
