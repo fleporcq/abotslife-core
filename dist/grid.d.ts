@@ -12,7 +12,9 @@ export declare class Grid {
     isInBound(position: Position): boolean;
     isEmpty(position: Position): boolean;
     add(item: Item, pose: Pose): void;
+    update(position: Position): void;
     get(position: Position): Item;
+    clear(position: Position): void;
     private getPositionIndex;
     private errorIfAlreadyUsed;
     private errorIfOutOfBounds;

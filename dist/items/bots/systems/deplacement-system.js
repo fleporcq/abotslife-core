@@ -35,7 +35,9 @@ var DeplacementSystem = /** @class */ (function () {
     };
     DeplacementSystem.prototype.move = function (forward) {
         this.shock = false;
-        var nexPosition = new Position(this.pose.position.x, this.pose.position.y);
+        var x = this.pose.position.x;
+        var y = this.pose.position.y;
+        var nexPosition = new Position(x, y);
         switch (this.pose.orientation) {
             case Orientation.NORTH:
                 nexPosition.y += forward ? -1 : +1;
@@ -52,6 +54,8 @@ var DeplacementSystem = /** @class */ (function () {
         }
         if (this.grid.isValidPosition(nexPosition)) {
             this.pose.position = nexPosition;
+            var oldPosition = new Position(x, y);
+            this.grid.update(oldPosition);
         }
         else {
             this.shock = true;

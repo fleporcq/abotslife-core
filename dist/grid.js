@@ -29,9 +29,21 @@ var Grid = /** @class */ (function () {
         item.setPose(pose);
         this.items[this.getPositionIndex(position)] = item;
     };
+    Grid.prototype.update = function (position) {
+        this.errorIfOutOfBounds(position);
+        var item = this.get(position);
+        if (item != null && (item.getPose().position.x !== position.x || item.getPose().position.y !== position.y)) {
+            this.clear(position);
+            this.add(item, item.getPose());
+        }
+    };
     Grid.prototype.get = function (position) {
         this.errorIfOutOfBounds(position);
         return this.items[this.getPositionIndex(position)];
+    };
+    Grid.prototype.clear = function (position) {
+        this.errorIfOutOfBounds(position);
+        this.items[this.getPositionIndex(position)] = null;
     };
     Grid.prototype.getPositionIndex = function (position) {
         return position.y * this.width + position.x;
