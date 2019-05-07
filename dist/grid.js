@@ -24,17 +24,27 @@ var Grid = /** @class */ (function () {
     };
     Grid.prototype.add = function (item, pose) {
         var position = pose.position;
-        if (!this.isValidPosition(position)) {
-            throw new Error(position + ' is not a valid position');
-        }
+        this.errorIfOutOfBounds(position);
+        this.errorIfAlreadyUsed(position);
         item.setPose(pose);
         this.items[this.getPositionIndex(position)] = item;
     };
     Grid.prototype.get = function (position) {
+        this.errorIfOutOfBounds(position);
         return this.items[this.getPositionIndex(position)];
     };
     Grid.prototype.getPositionIndex = function (position) {
         return position.y * this.width + position.x;
+    };
+    Grid.prototype.errorIfAlreadyUsed = function (position) {
+        if (!this.isEmpty(position)) {
+            throw new Error(position + ' is already used');
+        }
+    };
+    Grid.prototype.errorIfOutOfBounds = function (position) {
+        if (!this.isInBound(position)) {
+            throw new Error(position + ' is out of grid bounds');
+        }
     };
     return Grid;
 }());

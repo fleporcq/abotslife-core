@@ -14,4 +14,6 @@ export declare class Grid {
     add(item: Item, pose: Pose): void;
     get(position: Position): Item;
     private getPositionIndex;
+    private errorIfAlreadyUsed;
+    private errorIfOutOfBounds;
 }
