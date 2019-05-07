@@ -33,7 +33,7 @@ describe('Grid', () => {
     const add = () => {
       grid.add(null, new Pose(11, 0));
     };
-    expect(add).toThrow('(11,0) is not a valid position');
+    expect(add).toThrow('(11,0) is out of grid bounds');
   });
 
   it('should throw an error because the position is already used', () => {
@@ -45,6 +45,6 @@ describe('Grid', () => {
       expect(grid.get(wallPose.position)).toBe(wall);
       grid.add(new Bot(), wallPose);
     };
-    expect(add).toThrow('(5,5) is not a valid position');
+    expect(add).toThrow('(5,5) is already used');
   });
 });

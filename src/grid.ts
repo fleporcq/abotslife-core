@@ -41,19 +41,31 @@ export class Grid {
 
   public add(item: Item, pose: Pose) {
     const position = pose.position;
-    if (!this.isValidPosition(position)) {
-      throw new Error(position + ' is not a valid position');
-    }
+    this.errorIfOutOfBounds(position);
+    this.errorIfAlreadyUsed(position);
     item.setPose(pose);
     this.items[this.getPositionIndex(position)] = item;
   }
 
   public get(position: Position): Item {
+    this.errorIfOutOfBounds(position);
     return this.items[this.getPositionIndex(position)];
   }
 
   private getPositionIndex(position: Position): number {
     return position.y * this.width + position.x;
+  }
+
+  private errorIfAlreadyUsed(position) {
+    if (!this.isEmpty(position)) {
+      throw new Error(position + ' is already used');
+    }
+  }
+
+  private errorIfOutOfBounds(position) {
+    if (!this.isInBound(position)) {
+      throw new Error(position + ' is out of grid bounds');
+    }
   }
 
 }
