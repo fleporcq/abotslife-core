@@ -3,8 +3,11 @@ import { Pose } from './pose/pose';
 import { WorldAwareItem } from './items/world-aware-item';
 import { Actor } from './items/actor';
 import { Item } from './items/item';
+import { Clonable } from './clonable';
+import * as _ from 'lodash';
 
-export class World {
+
+export class World implements Clonable {
 
   private grid: Grid;
 
@@ -63,13 +66,19 @@ export class World {
     return this;
   }
 
-  public fastForward(count: number) {
+  public fastForward(count: number): this {
     if (!Number.isInteger(count) || count < 1) {
       throw new Error('count must be an integer greater or equal to 1');
     }
     for (let i = 0; i < count; i++) {
       this.next();
     }
+    return this;
   }
+
+  public clone(): World {
+    return _.cloneDeep(this);
+  }
+
 
 }

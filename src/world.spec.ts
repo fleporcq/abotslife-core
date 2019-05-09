@@ -3,6 +3,8 @@ import { SequentialBot } from './items/bots/sequential-bot';
 import { Pose } from './pose/pose';
 import { Orientation } from './pose/orientation';
 import { Wall } from './items/wall';
+import { Position } from './pose/position';
+import { ItemType } from './items/item-type';
 
 describe('World', () => {
 
@@ -46,6 +48,25 @@ describe('World', () => {
     world.fastForward(10);
     expect(world.getTickCount()).toBe(10);
     expect(bot.getPose().position.x).toBe(4);
+  });
+
+  it('should be cloned', () => {
+    const world = new World(10, 10);
+    const bot = new SequentialBot();
+    bot.flash('FORWARD').loop();
+    world.add(bot, new Pose(0, 0, Orientation.EAST));
+    const worldFuture = world.clone();
+
+    expect(worldFuture.getGrid().get(new Position(0, 0)).getType()).toEqual(ItemType.BOT);
+    expect(worldFuture.getGrid().get(new Position(3, 0))).toBeNull();
+    worldFuture.fastForward(3);
+
+    expect(bot.getPose().position.x).toBe(0);
+    expect(worldFuture.getGrid().get(new Position(0, 0))).toBeNull();
+    expect(worldFuture.getGrid().get(new Position(3, 0)).getType()).toEqual(ItemType.BOT);
+
+    expect(world.getGrid().get(new Position(0, 0)).getType()).toEqual(ItemType.BOT);
+    expect(world.getGrid().get(new Position(3, 0))).toBeNull();
   });
 
 });
