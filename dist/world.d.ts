@@ -7,6 +7,8 @@ export declare class World {
     private tickCount;
     constructor(width: number, height: number);
     getGrid(): Grid;
+    getWidth(): number;
+    getHeight(): number;
     add(item: Item, pose: Pose): void;
     private isWorldAwareItem;
     private isActor;

@@ -8,6 +8,12 @@ var World = /** @class */ (function () {
     World.prototype.getGrid = function () {
         return this.grid;
     };
+    World.prototype.getWidth = function () {
+        return this.grid.getWidth();
+    };
+    World.prototype.getHeight = function () {
+        return this.grid.getHeight();
+    };
     World.prototype.add = function (item, pose) {
         this.grid.add(item, pose);
         item.setPose(pose);
