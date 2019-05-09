@@ -6,6 +6,7 @@ var Grid = /** @class */ (function () {
         this.width = width;
         this.height = height;
         this.items = new Array(width * height).fill(null);
+        this.itemsByWid = [];
     }
     Grid.prototype.getWidth = function () {
         return this.width;
@@ -28,6 +29,10 @@ var Grid = /** @class */ (function () {
         this.errorIfAlreadyUsed(position);
         item.setPose(pose);
         this.items[this.getPositionIndex(position)] = item;
+        if (item.wid == null) {
+            item.wid = this.itemsByWid.length;
+            this.itemsByWid.push(item);
+        }
     };
     Grid.prototype.update = function (position) {
         this.errorIfOutOfBounds(position);
@@ -40,6 +45,9 @@ var Grid = /** @class */ (function () {
     Grid.prototype.get = function (position) {
         this.errorIfOutOfBounds(position);
         return this.items[this.getPositionIndex(position)];
+    };
+    Grid.prototype.getByWid = function (wid) {
+        return this.itemsByWid[wid];
     };
     Grid.prototype.clear = function (position) {
         this.errorIfOutOfBounds(position);

@@ -5,6 +5,7 @@ export declare class Grid {
     private width;
     private height;
     private items;
+    private itemsByWid;
     constructor(width: number, height: number);
     getWidth(): number;
     getHeight(): number;
@@ -14,6 +15,7 @@ export declare class Grid {
     add(item: Item, pose: Pose): void;
     update(position: Position): void;
     get(position: Position): Item;
+    getByWid(wid: number): Item;
     clear(position: Position): void;
     private getPositionIndex;
     private errorIfAlreadyUsed;
