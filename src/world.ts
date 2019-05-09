@@ -20,6 +20,14 @@ export class World {
     return this.grid;
   }
 
+  public getWidth(): number {
+    return this.grid.getWidth();
+  }
+
+  public getHeight(): number {
+    return this.grid.getHeight();
+  }
+
   public add(item: Item, pose: Pose) {
     this.grid.add(item, pose);
     item.setPose(pose);
