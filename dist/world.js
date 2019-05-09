@@ -1,4 +1,5 @@
 import { Grid } from './grid';
+import * as _ from 'lodash';
 var World = /** @class */ (function () {
     function World(width, height) {
         this.actors = [];
@@ -50,6 +51,10 @@ var World = /** @class */ (function () {
         for (var i = 0; i < count; i++) {
             this.next();
         }
+        return this;
+    };
+    World.prototype.clone = function () {
+        return _.cloneDeep(this);
     };
     return World;
 }());

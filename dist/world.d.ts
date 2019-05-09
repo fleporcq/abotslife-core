@@ -1,7 +1,8 @@
 import { Grid } from './grid';
 import { Pose } from './pose/pose';
 import { Item } from './items/item';
-export declare class World {
+import { Clonable } from './clonable';
+export declare class World implements Clonable {
     private grid;
     private actors;
     private tickCount;
@@ -15,5 +16,6 @@ export declare class World {
     tick(): void;
     getTickCount(): number;
     next(): this;
-    fastForward(count: number): void;
+    fastForward(count: number): this;
+    clone(): World;
 }
