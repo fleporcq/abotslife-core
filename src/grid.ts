@@ -10,6 +10,8 @@ export class Grid {
 
   private items: Item[];
 
+  private itemsByWid: Item[];
+
   constructor(width: number, height: number) {
     if (!Number.isInteger(width) || width < 1 || !Number.isInteger(height) || height < 1) {
       throw new Error('The width and height must be integers greater or equal to one');
@@ -17,6 +19,7 @@ export class Grid {
     this.width = width;
     this.height = height;
     this.items = new Array(width * height).fill(null);
+    this.itemsByWid = [];
   }
 
   public getWidth(): number {
@@ -45,6 +48,10 @@ export class Grid {
     this.errorIfAlreadyUsed(position);
     item.setPose(pose);
     this.items[this.getPositionIndex(position)] = item;
+    if (item.wid == null) {
+      item.wid = this.itemsByWid.length;
+      this.itemsByWid.push(item);
+    }
   }
 
   public update(position: Position) {
@@ -59,6 +66,10 @@ export class Grid {
   public get(position: Position): Item {
     this.errorIfOutOfBounds(position);
     return this.items[this.getPositionIndex(position)];
+  }
+
+  public getByWid(wid: number): Item {
+    return this.itemsByWid[wid];
   }
 
   public clear(position: Position) {

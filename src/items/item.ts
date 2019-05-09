@@ -7,6 +7,8 @@ export abstract class Item {
 
   protected pose: Pose;
 
+  public wid: number;
+
   constructor(type: ItemType) {
     this.type = type;
   }
@@ -22,4 +24,5 @@ export abstract class Item {
   public getType(): ItemType {
     return this.type;
   }
+
 }
